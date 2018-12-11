@@ -10,6 +10,10 @@ public:
 	~Display();
 
 	void displayField(char ** field) const;
+
+	void displayScore(int score) const;
+
+	void displayCounter(unsigned counter) const;
 private:
 	WINDOW * win;
 

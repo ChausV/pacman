@@ -1,20 +1,35 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <utility>
+
+#include "Maze.h"
+#include "MazeHabitant.h"
+
 class Game
 {
 public:
 	Game();
 	~Game();
 
-	int getFieldHeight() const;
-	int getFieldWidth() const;
-	char ** getField() const;
+	std::pair<int, int> getGameFieldSize() const;
+	char ** getGameField() const;
+
+	int getGameScore() const;
+
+	void pacmanLeft();
+	void pacmanRight();
+	void pacmanUp();
+	void pacmanDown();
 
 private:
-	int field_h;
-	int field_w;
-	char ** field;
+
+	MazeHabitant pacman;
+
+	Maze maze;
+
+	int score;
+
 };
 
 #endif // GAME_H

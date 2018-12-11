@@ -8,8 +8,14 @@ Display::Display(int field_h, int field_w) : game_field_h(field_h),
 	std::cout << "Constructor Display" << std::endl;
 
 	initscr();
+	noecho();
+	cbreak();
+	curs_set(0);
+	// nodelay(stdscr, true);
+	keypad(stdscr, true);
 	start_color();
 	init_pair(1, COLOR_BLACK, COLOR_BLUE);
+	init_pair(2, COLOR_BLACK, COLOR_YELLOW);
 	refresh();
 
 	win = newwin(field_h + 2, 2 * field_w + 2, 5, 5);
@@ -22,10 +28,22 @@ Display::Display(int field_h, int field_w) : game_field_h(field_h),
 Display::~Display()
 {
 	delwin(win);
-
+	// _nc_free_and_exit();
 	endwin();
 
 	std::cout << "Destructor Display" << std::endl;
+}
+
+void Display::displayScore(int score) const
+{
+	mvprintw(3, 25, "Score: %d", score);
+	refresh();
+}
+
+void Display::displayCounter(unsigned counter) const
+{
+	mvprintw(3, 5, "Counter: %d", counter);
+	refresh();
 }
 
 void Display::displayField(char ** field) const
@@ -36,19 +54,28 @@ void Display::displayField(char ** field) const
 		{
 			if (field[i][j] == 'X')
 			{
-				// wattron(win, COLOR_PAIR(1));
-				// mvwprintw(win, i + 2, j + 2, " ");
-				// wattroff(win, COLOR_PAIR(1));
 				mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(1));
 				mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(1));
 			}
-			if (field[i][j] == '.')
+			else if (field[i][j] == '.')
 			{
-				// wattron(win, COLOR_PAIR(1));
-				// mvwprintw(win, i + 2, j + 2, " ");
-				// wattroff(win, COLOR_PAIR(1));
 				mvwaddch(win, i + 1, 2 * j + 1, '.');
 				// mvwaddch(win, i + 1, 2 * j + 2, '.');
+			}
+			else if (field[i][j] == 'P')
+			{
+				mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(2));
+				mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(2));
+			}
+			else if (field[i][j] == '_')
+			{
+				mvwaddch(win, i + 1, 2 * j + 1, '_');
+				mvwaddch(win, i + 1, 2 * j + 2, '_');
+			}
+			else if (field[i][j] == ' ')
+			{
+				mvwaddch(win, i + 1, 2 * j + 1, ' ');
+				mvwaddch(win, i + 1, 2 * j + 2, ' ');
 			}
 		}
 	}

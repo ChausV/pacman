@@ -2,66 +2,52 @@
 
 #include <iostream>
 
-Game::Game() : field_h(23), field_w(23)
+Game::Game() : maze(Maze(pacman)), score(0)
 {
-	char temp[][field_w] = {
-		{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'},
-		{'X','.','.','.','.','.','.','.','.','.','.','X','.','.','.','.','.','.','.','.','.','.','X'},
-		{'X','.','X','X','X','.','X','X','X','X','.','X','.','X','X','X','X','.','X','X','X','.','X'},
-		{'X','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','X'},
-		{'X','.','X','X','X','.','X','.','X','X','X','X','X','X','X','.','X','.','X','X','X','.','X'},
-		{'X','.','.','.','.','.','X','.','.','.','.','X','.','.','.','.','X','.','.','.','.','.','X'},
-		{'X','X','X','X','X','.','X','X','X','X','.','X','.','X','X','X','X','.','X','X','X','X','X'},
-		{' ',' ',' ',' ','X','.','X',' ',' ',' ',' ',' ',' ',' ',' ',' ','X','.','X',' ',' ',' ',' '},
-		{' ',' ',' ',' ','X','.','X',' ','X','X','X','X','X','X','X',' ','X','.','X',' ',' ',' ',' '},
-		{'X','X','X','X','X','.','X',' ','X',' ',' ',' ',' ',' ','X',' ','X','.','X','X','X','X','X'},
-		{' ',' ',' ',' ',' ','.',' ',' ','X',' ',' ',' ',' ',' ','X',' ',' ','.',' ',' ',' ',' ',' '},
-		{'X','X','X','X','X','.','X',' ','X',' ',' ',' ',' ',' ','X',' ','X','.','X','X','X','X','X'},
-		{' ',' ',' ',' ','X','.','X',' ','X','X','X','X','X','X','X',' ','X','.','X',' ',' ',' ',' '},
-		{' ',' ',' ',' ','X','.','X',' ',' ',' ',' ',' ',' ',' ',' ',' ','X','.','X',' ',' ',' ',' '},
-		{'X','X','X','X','X','.','X',' ','X','X','X','X','X','X','X',' ','X','.','X','X','X','X','X'},
-		{'X','.','.','.','.','.','.','.','.','.','.','X','.','.','.','.','.','.','.','.','.','.','X'},
-		{'X','.','X','X','X','.','X','X','X','X','.','X','.','X','X','X','X','.','X','X','X','.','X'},
-		{'X','.','.','.','X','.','.','.','.','.','.','.','.','.','.','.','.','.','X','.','.','.','X'},
-		{'X','X','X','.','X','.','X','.','X','X','X','X','X','X','X','.','X','.','X','.','X','X','X'},
-		{'X','.','.','.','.','.','X','.','.','.','.','X','.','.','.','.','X','.','.','.','.','.','X'},
-		{'X','.','X','X','X','X','X','X','X','X','.','X','.','X','X','X','X','X','X','X','X','.','X'},
-		{'X','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','X'},
-		{'X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'}
-	};
-	field = new char*[field_h];
-	for(int i = 0; i < field_h; ++i)
-	{
-		field[i] = new char[field_w];
-		for(int j = 0; j < field_w; ++j)
-		{
-			field[i][j] = temp[i][j];
-		}
-	}
 	std::cout << "Constructor Game" << std::endl;
 }
 
 Game::~Game()
 {
-	for(int i = 0; i < field_h; ++i)
-	{
-		delete [] field[i];
-	}
-	delete [] field;
 	std::cout << "Destructor Game" << std::endl;
 }
 
-int Game::getFieldHeight() const
+std::pair<int, int> Game::getGameFieldSize() const
 {
-	return field_h;
+	const std::pair<int, int> size(maze.getFieldHeight(), maze.getFieldWidth());
+	return size;
 }
 
-int Game::getFieldWidth() const
+int Game::getGameScore() const
 {
-	return field_w;
+	return score;
 }
 
-char ** Game::getField() const
+char ** Game::getGameField() const
 {
-	return field;
+	return maze.getField();
+}
+
+void Game::pacmanLeft()
+{
+	char where = maze.moveHabitant(pacman, pacman.getY(), pacman.getX() - 1);
+	if (where == '.') { ++score; }
+}
+
+void Game::pacmanRight()
+{
+	char where = maze.moveHabitant(pacman, pacman.getY(), pacman.getX() + 1);
+	if (where == '.') { ++score; }
+}
+
+void Game::pacmanUp()
+{
+	char where = maze.moveHabitant(pacman, pacman.getY() - 1, pacman.getX());
+	if (where == '.') { ++score; }
+}
+
+void Game::pacmanDown()
+{
+	char where = maze.moveHabitant(pacman, pacman.getY() + 1, pacman.getX());
+	if (where == '.') { ++score; }
 }
