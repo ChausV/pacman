@@ -11,11 +11,11 @@ find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
 add_executable(${EXECUTABLE_NAME}
-	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Display.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Maze.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/MazeHabitant.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Display.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Maze.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/MazeHabitant.cpp
 )
 
 target_link_libraries(${EXECUTABLE_NAME} ${CURSES_LIBRARIES})

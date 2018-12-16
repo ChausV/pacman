@@ -9,26 +9,28 @@
 class Game
 {
 public:
-	Game();
-	~Game();
+    Game();
+    ~Game();
 
-	std::pair<int, int> getGameFieldSize() const;
-	char ** getGameField() const;
+    std::pair<int, int> getGameFieldSize() const;
+    char ** getGameField() const;
 
-	int getGameScore() const;
+    int getGameScore() const;
 
-	void pacmanLeft();
-	void pacmanRight();
-	void pacmanUp();
-	void pacmanDown();
+    void pacmanLeft();
+    void pacmanRight();
+    void pacmanUp();
+    void pacmanDown();
+
+    void processStep();
 
 private:
 
-	MazeHabitant pacman;
+    MazeHabitant pacman;
 
-	Maze maze;
+    Maze maze;
 
-	int score;
+    int score;
 
 };
 

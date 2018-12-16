@@ -6,21 +6,22 @@
 class Maze
 {
 public:
-	Maze(MazeHabitant & pacman);
-	~Maze();
+    Maze(MazeHabitant & pacman);
+    ~Maze();
 
-	int getFieldHeight() const;
-	int getFieldWidth() const;
-	char ** getField() const;
+    int getFieldHeight() const;
+    int getFieldWidth() const;
+    char ** getField() const;
 
-	// parameters: move whom, move where
-	char moveHabitant(MazeHabitant & h, int y, int x);
+    // parameters: move whom, move where
+    char moveHabitant(MazeHabitant & h, int y, int x);
+    char shiftHabitant(MazeHabitant & h);
 
 private:
 
-	int field_h;
-	int field_w;
-	char ** field;
+    int field_h;
+    int field_w;
+    char ** field;
 
 };
 

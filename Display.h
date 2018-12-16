@@ -6,19 +6,19 @@
 class Display
 {
 public:
-	Display(int field_h, int field_w);
-	~Display();
+    Display(int field_h, int field_w);
+    ~Display();
 
-	void displayField(char ** field) const;
+    void displayField(char ** field) const;
 
-	void displayScore(int score) const;
+    void displayScore(int score) const;
 
-	void displayCounter(unsigned counter) const;
+    void displayCounter(unsigned counter) const;
 private:
-	WINDOW * win;
+    WINDOW * win;
 
-	int game_field_h;
-	int game_field_w;
+    int game_field_h;
+    int game_field_w;
 };
 
 #endif // DISPLAY_H
