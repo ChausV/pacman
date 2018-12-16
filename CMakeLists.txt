@@ -1,21 +1,28 @@
 cmake_minimum_required(VERSION 3.0)
 
+set(PROJECT_NAME "pacman")
+project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -o0 -g -Wall -Wextra -Werror")
 
-set(EXECUTABLE_NAME pacman)
+add_subdirectory("game_logic_lib")
+add_subdirectory("user_interface_lib")
 
-find_package(Curses REQUIRED)
-include_directories(${CURSES_INCLUDE_DIR})
+set(LIBRARIES "logic" "uincurses")
 
-add_executable(${EXECUTABLE_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Display.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/Maze.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/MazeHabitant.cpp
+include_directories(
+#	${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/game_logic_lib/include
+	${CMAKE_CURRENT_SOURCE_DIR}/user_interface_lib/include
 )
 
-target_link_libraries(${EXECUTABLE_NAME} ${CURSES_LIBRARIES})
+set(EXECUTABLE_SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/src/pacman_main.cpp
+)
+
+add_executable(${PROJECT_NAME} ${EXECUTABLE_SRC})
+
+target_link_libraries(${PROJECT_NAME} ${LIBRARIES})

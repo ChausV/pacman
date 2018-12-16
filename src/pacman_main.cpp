@@ -33,7 +33,7 @@ int main()
     while(loop_flag)
     {
 
-        input = getch();
+        input = display.getUserInput();
         if (input != -1)
             input_2 = input;
 
@@ -84,13 +84,11 @@ int main()
                 ++counter;
             }
 
+            display.displayTime(diff);
 
-            mvprintw(30, 30, "time: %f", diff);
             delay += 0.2f;
         }
     }
-
-    // getch();
 
     return 0;
 }

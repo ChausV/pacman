@@ -36,6 +36,11 @@ Display::~Display()
     std::cout << "Destructor Display" << std::endl;
 }
 
+int Display::getUserInput() const
+{
+    return getch();
+}
+
 void Display::displayScore(int score) const
 {
     mvprintw(3, 25, "Score: %d", score);
@@ -45,6 +50,12 @@ void Display::displayScore(int score) const
 void Display::displayCounter(unsigned counter) const
 {
     mvprintw(3, 5, "Counter: %d", counter);
+    refresh();
+}
+
+void Display::displayTime(float time) const
+{
+    mvprintw(30, 30, "time: %f", time);
     refresh();
 }
 

@@ -9,11 +9,12 @@ public:
     Display(int field_h, int field_w);
     ~Display();
 
+    int getUserInput() const;
+
     void displayField(char ** field) const;
-
     void displayScore(int score) const;
-
     void displayCounter(unsigned counter) const;
+    void displayTime(float time) const;
 private:
     WINDOW * win;
 
