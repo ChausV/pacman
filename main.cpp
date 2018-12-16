@@ -17,8 +17,6 @@ int main()
 
     Game game;
 
-    char ** field = game.getGameField();
-
     std::pair<int, int> fieldSize = game.getGameFieldSize();
     Display display(fieldSize.first, fieldSize.second);
 
@@ -27,6 +25,7 @@ int main()
     int input_2 = 0;
     unsigned counter = 0u;
     bool loop_flag = true;
+    bool pause = false;
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     std::chrono::steady_clock::time_point end;
     float delay = 0.0f;
@@ -51,34 +50,43 @@ int main()
                     loop_flag = false;
                     break;
                 case 'p':
-                    nodelay(stdscr, false);
-                    while('p' != getch())
-                        ;
-                    nodelay(stdscr, true);
+                    if (pause)
+                        pause = false;
+                    else
+                        pause = true;
                     break;
                 case KEY_LEFT:
-                    game.pacmanLeft();
+                    if (!pause)
+                        game.pacmanLeft();
                     break;
                 case KEY_RIGHT:
-                    game.pacmanRight();
+                    if (!pause)
+                        game.pacmanRight();
                     break;
                 case KEY_UP:
-                    game.pacmanUp();
+                    if (!pause)
+                        game.pacmanUp();
                     break;
                 case KEY_DOWN:
-                    game.pacmanDown();
+                    if (!pause)
+                        game.pacmanDown();
                     break;
             }
             input_2 = -1;
 
-            game.processStep();
+            if (!pause)
+            {
+                game.processStep();
 
-            display.displayField(field);
-            display.displayScore(game.getGameScore());
-            display.displayCounter(counter);
-            ++counter;
+                display.displayField(game.getGameField());
+                display.displayScore(game.getGameScore());
+                display.displayCounter(counter);
+                ++counter;
+            }
+
+
             mvprintw(30, 30, "time: %f", diff);
-            delay += 0.1f;
+            delay += 0.2f;
         }
     }
 
