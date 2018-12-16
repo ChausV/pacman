@@ -5,6 +5,7 @@
 
 #include "Maze.h"
 #include "MazeHabitant.h"
+#include "MainLoopData.h"
 
 class Game
 {
@@ -16,6 +17,10 @@ public:
     char ** getGameField() const;
 
     int getGameScore() const;
+    bool getMainLoopState() const;
+    unsigned getFramesCounter() const;
+    float getGameTime() const;
+
 
     void pacmanLeft();
     void pacmanRight();
@@ -24,6 +29,9 @@ public:
 
     void processStep();
 
+    bool mainLoopProcessing(int input);
+
+
 private:
 
     MazeHabitant pacman;
@@ -31,6 +39,10 @@ private:
     Maze maze;
 
     int score;
+
+    MainLoopData * mld;
+
+    bool main_loop_state;
 
 };
 
