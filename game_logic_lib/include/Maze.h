@@ -2,6 +2,7 @@
 #define MAZE_H
 
 #include "MazeHabitant.h"
+class MazeHabitant;
 
 class Maze
 {

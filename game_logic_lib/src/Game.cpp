@@ -51,8 +51,9 @@ void Game::pacmanDown() {
 
 void Game::processStep()
 {
-    char where = maze.shiftHabitant(pacman);
-    if (where == '.') { ++score; }
+    // char where = maze.shiftHabitant(pacman);
+    char where = pacman.moveStep(maze);
+    if (where == '.') { score += 10; }
 
     ++mld->frames_counter;
 }

@@ -1,6 +1,9 @@
 #ifndef MAZE_HABITANT_H
 #define MAZE_HABITANT_H
 
+#include "Maze.h"
+class Maze;
+
 class MazeHabitant
 {
 public:
@@ -16,6 +19,9 @@ public:
     void setX(int x);
     void setCurrDirection(char c);
     void setNextDirection(char c);
+
+    char move(Maze & m, int y, int x);
+    char moveStep(Maze & m);
 
 private:
     int y;
