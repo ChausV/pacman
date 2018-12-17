@@ -3,18 +3,14 @@
 #include "Game.h"
 #include "Display.h"
 
-#include <iostream>
+// #include <chrono>
 
-#include <chrono>
-
-using std::cout;
-using std::endl;
+// #include <iostream>
+// using std::cout;
+// using std::endl;
 
 int main()
 {
-    cout << "Hello" << endl;
-
-
     Game game;
 
     std::pair<int, int> fieldSize = game.getGameFieldSize();
