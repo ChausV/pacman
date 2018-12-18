@@ -16,7 +16,13 @@ Display::Display(int field_h, int field_w) : game_field_h(field_h),
     start_color();
     init_pair(1, COLOR_BLACK, COLOR_BLUE);
     init_pair(2, COLOR_BLACK, COLOR_YELLOW);
+
     init_pair(3, COLOR_BLACK, COLOR_RED);
+    init_pair(4, COLOR_BLACK, COLOR_GREEN);
+    init_pair(5, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(6, COLOR_BLACK, COLOR_CYAN);
+
+    init_pair(7, COLOR_BLACK, COLOR_WHITE);
     refresh();
 
     win = newwin(field_h + 2, 2 * field_w + 2, 5, 5);
@@ -92,10 +98,25 @@ void Display::displayField(char ** field) const
                 mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(2));
                 mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(2));
             }
-            else if (field[i][j] == 'G')
+            else if (field[i][j] == 'B')
             {
                 mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(3));
                 mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(3));
+            }
+            else if (field[i][j] == 'S')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(4));
+                mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(4));
+            }
+            else if (field[i][j] == 'I')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(7));
+                mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(7));
+            }
+            else if (field[i][j] == 'C')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(6));
+                mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(6));
             }
             else if (field[i][j] == '_')
             {

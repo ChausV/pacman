@@ -3,7 +3,6 @@
 #include "Game.h"
 #include "Display.h"
 
-// #include <chrono>
 
 // #include <iostream>
 // using std::cout;
@@ -11,6 +10,7 @@
 
 int main()
 {
+
     Game game;
 
     std::pair<int, int> fieldSize = game.getGameFieldSize();

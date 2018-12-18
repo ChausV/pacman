@@ -6,7 +6,10 @@
 #include "Maze.h"
 #include "MazeHabitant.h"
 #include "Pacman.h"
-#include "Ghost.h"
+#include "Blinky.h"
+#include "Speedy.h"
+#include "Inky.h"
+#include "Clyde.h"
 #include "MainLoopData.h"
 
 class Game
@@ -32,10 +35,10 @@ public:
 private:
 
     Pacman pacman;
-    Ghost * ghost;
-    Ghost * ghost2;
-    Ghost * ghost3;
-    Ghost * ghost4;
+    Blinky * ghost;
+    Speedy * ghost2;
+    Inky * ghost3;
+    Clyde * ghost4;
 
     Maze maze;
 

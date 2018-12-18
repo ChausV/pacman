@@ -7,20 +7,22 @@
 class Ghost : public MazeHabitant
 {
 public:
-    // Ghost();
+    Ghost(char name);
 
     char getStayOn() const;
     void setStayOn(char c);
 
     virtual char move(Maze & m, int y, int x);
-    virtual char moveStep(Maze & m, Pacman & p);
+    virtual char moveStep(Maze & m, Pacman & p) = 0;
 
-    char newDirection(const Maze & m, const Pacman & p);
-
-private:
+protected:
     char stayOn;
+    char name;
 
-    char tryToMove(Maze & m);
+    virtual char newDirection(const Maze & m, const Pacman & p) = 0;
+
+    char makeCurrDirStep(Maze & m);
+
 };
 
 #endif // GHOST_H

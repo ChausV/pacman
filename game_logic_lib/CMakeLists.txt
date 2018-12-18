@@ -12,6 +12,10 @@ set(LOGIC_LIBRARY_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/src/MazeHabitant.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Pacman.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Ghost.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Blinky.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Speedy.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Inky.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Clyde.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

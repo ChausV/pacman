@@ -12,7 +12,7 @@ public:
     void setNextDirection(char c);
 
     virtual char move(Maze & m, int y, int x);
-    virtual char moveStep(Maze & m);
+    char moveStep(Maze & m);
 
 private:
 

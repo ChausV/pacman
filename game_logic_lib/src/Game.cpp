@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Game::Game() : ghost(nullptr), ghost2(nullptr), ghost3(nullptr), ghost4(nullptr),
+Game::Game() : ghost(nullptr), ghost2(nullptr),ghost3(nullptr), ghost4(nullptr),
                 maze(pacman), score(0), lives(5),
                 mld(nullptr), main_loop_state(true)
 {
@@ -104,7 +104,7 @@ void Game::processStep()
     {
         score += 50;
     }
-    else if (where == 'G')
+    else if (where == 'B' || where == 'S' || where == 'I' || where == 'C')
     {
         collision();
     }
@@ -159,7 +159,7 @@ bool Game::mainLoopProcessing(int input)
 
     if (!ghost && mld->frames_counter > 10)
     {
-        ghost = new Ghost;
+        ghost = new Blinky;
         ghost->setX(11);
         ghost->setY(7);
         ghost->setCurrDirection('u');
@@ -167,7 +167,7 @@ bool Game::mainLoopProcessing(int input)
     }
     if (!ghost2 && mld->frames_counter > 20)
     {
-        ghost2 = new Ghost;
+        ghost2 = new Speedy;
         ghost2->setX(11);
         ghost2->setY(7);
         ghost2->setCurrDirection('u');
@@ -175,7 +175,7 @@ bool Game::mainLoopProcessing(int input)
     }
     if (!ghost3 && mld->frames_counter > 30)
     {
-        ghost3 = new Ghost;
+        ghost3 = new Inky;
         ghost3->setX(11);
         ghost3->setY(7);
         ghost3->setCurrDirection('u');
@@ -183,7 +183,7 @@ bool Game::mainLoopProcessing(int input)
     }
     if (!ghost4 && mld->frames_counter > 40)
     {
-        ghost4 = new Ghost;
+        ghost4 = new Clyde;
         ghost4->setX(11);
         ghost4->setY(7);
         ghost4->setCurrDirection('u');
