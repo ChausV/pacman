@@ -8,26 +8,23 @@ class MazeHabitant
 {
 public:
     MazeHabitant();
-    ~MazeHabitant() = default;
+    virtual ~MazeHabitant() = default;
     
     int getY() const;
     int getX() const;
     char getCurrDirection() const;
-    char getNextDirection() const;
 
     void setY(int y);
     void setX(int x);
     void setCurrDirection(char c);
-    void setNextDirection(char c);
 
-    char move(Maze & m, int y, int x);
-    char moveStep(Maze & m);
+    virtual char move(Maze & m, int y, int x) = 0;
+    // virtual char moveStep(Maze & m);
 
-private:
+protected:
     int y;
     int x;
     char currentDirection;
-    char nextDirection;
 };
 
 #endif // MAZE_HABITANT_H

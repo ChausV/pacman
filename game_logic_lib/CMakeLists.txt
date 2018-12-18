@@ -10,6 +10,8 @@ set(LOGIC_LIBRARY_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Game.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Maze.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/MazeHabitant.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Pacman.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Ghost.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

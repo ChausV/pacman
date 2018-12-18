@@ -15,8 +15,8 @@ public:
     char ** getField() const;
 
     // parameters: move whom, move where
-    char moveHabitant(MazeHabitant & h, int y, int x);
-    char shiftHabitant(MazeHabitant & h);
+    // char moveHabitant(MazeHabitant & h, int y, int x);
+    // char shiftHabitant(MazeHabitant & h);
 
 private:
 

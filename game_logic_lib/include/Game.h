@@ -5,6 +5,8 @@
 
 #include "Maze.h"
 #include "MazeHabitant.h"
+#include "Pacman.h"
+#include "Ghost.h"
 #include "MainLoopData.h"
 
 class Game
@@ -34,7 +36,8 @@ public:
 
 private:
 
-    MazeHabitant pacman;
+    Pacman pacman;
+    Ghost * ghost;
 
     Maze maze;
 

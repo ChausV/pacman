@@ -73,51 +73,51 @@ char ** Maze::getField() const
     return field;
 }
 
-char Maze::moveHabitant(MazeHabitant & h, int y, int x)
-{
-    if (field[y][x] == 'X' || field[y][x] == '_')
-        return 'N';
-    if (y < 0) { y = field_h - 1; }
-    if (y >= field_h) { y = 0; }
-    if (x < 0) { x = field_w - 1; }
-    if (x >= field_w) { x = 0; }
+// char Maze::moveHabitant(MazeHabitant & h, int y, int x)
+// {
+//     if (field[y][x] == 'X' || field[y][x] == '_')
+//         return 'N';
+//     if (y < 0) { y = field_h - 1; }
+//     if (y >= field_h) { y = 0; }
+//     if (x < 0) { x = field_w - 1; }
+//     if (x >= field_w) { x = 0; }
 
-    field[h.getY()][h.getX()] = ' ';
-    char old = field[y][x];
-    field[y][x] = 'P';
-    h.setY(y);
-    h.setX(x);
-    return old;
-}
+//     field[h.getY()][h.getX()] = ' ';
+//     char old = field[y][x];
+//     field[y][x] = 'P';
+//     h.setY(y);
+//     h.setX(x);
+//     return old;
+// }
 
-char Maze::shiftHabitant(MazeHabitant & h)
-{
-    const char nextDir = h.getNextDirection();
-    int yNext{0};
-    int xNext{0};
-    if (nextDir == 'l') { --xNext; }
-    else if (nextDir == 'r') { ++xNext; }
-    else if (nextDir == 'u') { --yNext; }
-    else if (nextDir == 'd') { ++yNext; }
-    char where = moveHabitant(h, h.getY() + yNext, h.getX() + xNext);
-    if (where != 'N')
-    {
-        h.setCurrDirection(nextDir);
-        return where;
-    }
+// char Maze::shiftHabitant(MazeHabitant & h)
+// {
+//     const char nextDir = h.getNextDirection();
+//     int yNext{0};
+//     int xNext{0};
+//     if (nextDir == 'l') { --xNext; }
+//     else if (nextDir == 'r') { ++xNext; }
+//     else if (nextDir == 'u') { --yNext; }
+//     else if (nextDir == 'd') { ++yNext; }
+//     char where = moveHabitant(h, h.getY() + yNext, h.getX() + xNext);
+//     if (where != 'N')
+//     {
+//         h.setCurrDirection(nextDir);
+//         return where;
+//     }
 
-    const char currDir = h.getCurrDirection();
-    int yCurr{0};
-    int xCurr{0};
-    if (currDir == 'l') { --xCurr; }
-    else if (currDir == 'r') { ++xCurr; }
-    else if (currDir == 'u') { --yCurr; }
-    else if (currDir == 'd') { ++yCurr; }
-    where = moveHabitant(h, h.getY() + yCurr, h.getX() + xCurr);
-    if (where != 'N')
-    {
-        return where;
-    }
+//     const char currDir = h.getCurrDirection();
+//     int yCurr{0};
+//     int xCurr{0};
+//     if (currDir == 'l') { --xCurr; }
+//     else if (currDir == 'r') { ++xCurr; }
+//     else if (currDir == 'u') { --yCurr; }
+//     else if (currDir == 'd') { ++yCurr; }
+//     where = moveHabitant(h, h.getY() + yCurr, h.getX() + xCurr);
+//     if (where != 'N')
+//     {
+//         return where;
+//     }
 
-    return 'N';
-}
+//     return 'N';
+// }

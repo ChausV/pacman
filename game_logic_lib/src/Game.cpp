@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Game::Game() : maze(pacman), score(0), mld(nullptr), main_loop_state(true)
+Game::Game() : ghost(nullptr), maze(pacman), score(0), mld(nullptr), main_loop_state(true)
 {
     std::cout << "Constructor Game" << std::endl;
 }
@@ -10,6 +10,7 @@ Game::Game() : maze(pacman), score(0), mld(nullptr), main_loop_state(true)
 Game::~Game()
 {
     delete mld;
+    delete ghost;
     std::cout << "Destructor Game" << std::endl;
 }
 
@@ -55,6 +56,9 @@ void Game::processStep()
     char where = pacman.moveStep(maze);
     if (where == '.') { score += 10; }
 
+    if (ghost)
+        ghost->moveStep(maze, pacman);
+
     ++mld->frames_counter;
 }
 
@@ -68,6 +72,15 @@ bool Game::mainLoopProcessing(int input)
     if (input != -1)
     {
         mld->input = input;
+    }
+
+    if (mld->frames_counter == 10)
+    {
+        ghost = new Ghost;
+        ghost->setX(12);
+        ghost->setY(7);
+        ghost->setCurrDirection('l');
+        ghost->setStayOn((maze.getField())[7][12]);
     }
 
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();

@@ -16,6 +16,7 @@ Display::Display(int field_h, int field_w) : game_field_h(field_h),
     start_color();
     init_pair(1, COLOR_BLACK, COLOR_BLUE);
     init_pair(2, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(3, COLOR_BLACK, COLOR_RED);
     refresh();
 
     win = newwin(field_h + 2, 2 * field_w + 2, 5, 5);
@@ -73,12 +74,17 @@ void Display::displayField(char ** field) const
             else if (field[i][j] == '.')
             {
                 mvwaddch(win, i + 1, 2 * j + 1, '.');
-                // mvwaddch(win, i + 1, 2 * j + 2, '.');
+                mvwaddch(win, i + 1, 2 * j + 2, ' ');
             }
             else if (field[i][j] == 'P')
             {
                 mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(2));
                 mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(2));
+            }
+            else if (field[i][j] == 'G')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(3));
+                mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(3));
             }
             else if (field[i][j] == '_')
             {
