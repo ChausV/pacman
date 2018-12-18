@@ -16,7 +16,7 @@ char Ghost::move(Maze & m, int y, int x)
     if (x < 0) { x = m.getFieldWidth() - 1; }
     if (x >= m.getFieldWidth()) { x = 0; }
 
-    if (stayOn != 'G')
+    if (stayOn != 'G' && stayOn != 'P')
     {
         // this is (not crutch) for correct ghosts overlaying
         field[this->y][this->x] = stayOn;

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Game::Game() : ghost(nullptr), ghost2(nullptr),
+Game::Game() : ghost(nullptr), ghost2(nullptr), ghost3(nullptr), ghost4(nullptr),
                 maze(pacman), score(0), lives(5),
                 mld(nullptr), main_loop_state(true)
 {
@@ -14,6 +14,8 @@ Game::~Game()
     delete mld;
     delete ghost;
     delete ghost2;
+    delete ghost3;
+    delete ghost4;
     std::cout << "Destructor Game" << std::endl;
 }
 
@@ -62,10 +64,29 @@ void Game::collision()
         main_loop_state = false;
 
     // (maze.getField())[pacman.getY()][pacman.getX()] = ' ';
- 
-    ghost->move(maze, 7, 12);
-    ghost2->move(maze, 7, 12);
-    pacman.move(maze, 17, 12);
+    if (ghost)
+    {
+        ghost->move(maze, 7, 12);
+        ghost->setCurrDirection('d');
+    }
+    if (ghost2)
+    {
+        ghost2->move(maze, 7, 10);
+        ghost2->setCurrDirection('d');
+    }
+    if (ghost3)
+    {
+        ghost3->move(maze, 7, 13);
+        ghost3->setCurrDirection('d');
+    }
+    if (ghost4)
+    {
+        ghost4->move(maze, 7, 9);
+        ghost4->setCurrDirection('d');
+    }
+
+    pacman.move(maze, 17, 11);
+    pacman.setNextDirection('l');
 
 
     // (maze.getField())[ghost->getY()][ghost->getX()] = ' ';
@@ -78,6 +99,10 @@ void Game::processStep()
     if (where == '.')
     {
         score += 10;
+    }
+        if (where == 'o')
+    {
+        score += 50;
     }
     else if (where == 'G')
     {
@@ -95,6 +120,22 @@ void Game::processStep()
     if (ghost2)
     {
         where = ghost2->moveStep(maze, pacman);
+        if (where == 'P')
+        {
+            collision();
+        }
+    }
+    if (ghost3)
+    {
+        where = ghost3->moveStep(maze, pacman);
+        if (where == 'P')
+        {
+            collision();
+        }
+    }
+    if (ghost4)
+    {
+        where = ghost4->moveStep(maze, pacman);
         if (where == 'P')
         {
             collision();
@@ -119,18 +160,34 @@ bool Game::mainLoopProcessing(int input)
     if (!ghost && mld->frames_counter > 10)
     {
         ghost = new Ghost;
-        ghost->setX(12);
+        ghost->setX(11);
         ghost->setY(7);
-        ghost->setCurrDirection('l');
-        ghost->setStayOn((maze.getField())[7][12]);
+        ghost->setCurrDirection('u');
+        ghost->setStayOn((maze.getField())[7][11]);
     }
     if (!ghost2 && mld->frames_counter > 20)
     {
         ghost2 = new Ghost;
-        ghost2->setX(12);
+        ghost2->setX(11);
         ghost2->setY(7);
-        ghost2->setCurrDirection('r');
-        ghost2->setStayOn((maze.getField())[7][12]);
+        ghost2->setCurrDirection('u');
+        ghost2->setStayOn((maze.getField())[7][11]);
+    }
+    if (!ghost3 && mld->frames_counter > 30)
+    {
+        ghost3 = new Ghost;
+        ghost3->setX(11);
+        ghost3->setY(7);
+        ghost3->setCurrDirection('u');
+        ghost3->setStayOn((maze.getField())[7][11]);
+    }
+    if (!ghost4 && mld->frames_counter > 40)
+    {
+        ghost4 = new Ghost;
+        ghost4->setX(11);
+        ghost4->setY(7);
+        ghost4->setCurrDirection('u');
+        ghost4->setStayOn((maze.getField())[7][11]);
     }
 
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
