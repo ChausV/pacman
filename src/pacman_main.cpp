@@ -25,6 +25,7 @@ int main()
 
             display.displayField(game.getGameField());
             display.displayScore(game.getGameScore());
+            display.displayLives(game.getGameLives());
             display.displayCounter(game.getFramesCounter());
             display.displayTime(game.getGameTime());
         }

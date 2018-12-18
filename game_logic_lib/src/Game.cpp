@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-Game::Game() : ghost(nullptr), maze(pacman), score(0), mld(nullptr), main_loop_state(true)
+Game::Game() : ghost(nullptr), maze(pacman), score(0), lives(5),
+                mld(nullptr), main_loop_state(true)
 {
     std::cout << "Constructor Game" << std::endl;
 }
@@ -34,6 +35,9 @@ unsigned Game::getFramesCounter() const {
 float Game::getGameTime() const {
     return mld->game_time;
 }
+int Game::getGameLives() const {
+    return lives;
+}
 
 
 void Game::pacmanLeft() {
@@ -50,14 +54,41 @@ void Game::pacmanDown() {
 }
 
 
+void Game::collision()
+{
+    if(!--lives)
+        main_loop_state = false;
+
+    // (maze.getField())[pacman.getY()][pacman.getX()] = ' ';
+ 
+    ghost->move(maze, 7, 12);
+    pacman.move(maze, 17, 12);
+
+
+    // (maze.getField())[ghost->getY()][ghost->getX()] = ' ';
+}
+
 void Game::processStep()
 {
     // char where = maze.shiftHabitant(pacman);
     char where = pacman.moveStep(maze);
-    if (where == '.') { score += 10; }
+    if (where == '.')
+    {
+        score += 10;
+    }
+    else if (where == 'G')
+    {
+        collision();
+    }
 
     if (ghost)
-        ghost->moveStep(maze, pacman);
+    {
+        where = ghost->moveStep(maze, pacman);
+        if (where == 'P')
+        {
+            collision();
+        }
+    }
 
     ++mld->frames_counter;
 }

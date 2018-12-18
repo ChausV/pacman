@@ -13,6 +13,7 @@ public:
 
     void displayField(char ** field) const;
     void displayScore(int score) const;
+    void displayLives(int lives) const;
     void displayCounter(unsigned counter) const;
     void displayTime(float time) const;
 private:

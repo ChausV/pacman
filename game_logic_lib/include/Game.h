@@ -22,14 +22,9 @@ public:
     bool getMainLoopState() const;
     unsigned getFramesCounter() const;
     float getGameTime() const;
+    int getGameLives() const;
 
 
-    void pacmanLeft();
-    void pacmanRight();
-    void pacmanUp();
-    void pacmanDown();
-
-    void processStep();
 
     bool mainLoopProcessing(int input);
 
@@ -42,10 +37,20 @@ private:
     Maze maze;
 
     int score;
+    int lives;
 
     MainLoopData * mld;
 
     bool main_loop_state;
+
+
+    void pacmanLeft();
+    void pacmanRight();
+    void pacmanUp();
+    void pacmanDown();
+
+    void processStep();
+    void collision();
 
 };
 

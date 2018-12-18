@@ -48,6 +48,12 @@ void Display::displayScore(int score) const
     refresh();
 }
 
+void Display::displayLives(int lives) const
+{
+    mvprintw(30, 5, "Lives: %d", lives);
+    refresh();
+}
+
 void Display::displayCounter(unsigned counter) const
 {
     mvprintw(3, 5, "Counter: %d", counter);
@@ -74,6 +80,11 @@ void Display::displayField(char ** field) const
             else if (field[i][j] == '.')
             {
                 mvwaddch(win, i + 1, 2 * j + 1, '.');
+                mvwaddch(win, i + 1, 2 * j + 2, ' ');
+            }
+            else if (field[i][j] == 'o')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, 'o');
                 mvwaddch(win, i + 1, 2 * j + 2, ' ');
             }
             else if (field[i][j] == 'P')
