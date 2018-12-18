@@ -33,6 +33,7 @@ private:
 
     Pacman pacman;
     Ghost * ghost;
+    Ghost * ghost2;
 
     Maze maze;
 

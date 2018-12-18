@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-Game::Game() : ghost(nullptr), maze(pacman), score(0), lives(5),
+Game::Game() : ghost(nullptr), ghost2(nullptr),
+                maze(pacman), score(0), lives(5),
                 mld(nullptr), main_loop_state(true)
 {
     std::cout << "Constructor Game" << std::endl;
@@ -12,6 +13,7 @@ Game::~Game()
 {
     delete mld;
     delete ghost;
+    delete ghost2;
     std::cout << "Destructor Game" << std::endl;
 }
 
@@ -62,6 +64,7 @@ void Game::collision()
     // (maze.getField())[pacman.getY()][pacman.getX()] = ' ';
  
     ghost->move(maze, 7, 12);
+    ghost2->move(maze, 7, 12);
     pacman.move(maze, 17, 12);
 
 
@@ -89,6 +92,14 @@ void Game::processStep()
             collision();
         }
     }
+    if (ghost2)
+    {
+        where = ghost2->moveStep(maze, pacman);
+        if (where == 'P')
+        {
+            collision();
+        }
+    }
 
     ++mld->frames_counter;
 }
@@ -105,13 +116,21 @@ bool Game::mainLoopProcessing(int input)
         mld->input = input;
     }
 
-    if (mld->frames_counter == 10)
+    if (!ghost && mld->frames_counter > 10)
     {
         ghost = new Ghost;
         ghost->setX(12);
         ghost->setY(7);
         ghost->setCurrDirection('l');
         ghost->setStayOn((maze.getField())[7][12]);
+    }
+    if (!ghost2 && mld->frames_counter > 20)
+    {
+        ghost2 = new Ghost;
+        ghost2->setX(12);
+        ghost2->setY(7);
+        ghost2->setCurrDirection('r');
+        ghost2->setStayOn((maze.getField())[7][12]);
     }
 
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();

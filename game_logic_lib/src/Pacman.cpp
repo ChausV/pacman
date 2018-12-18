@@ -9,12 +9,12 @@ Pacman::Pacman() : nextDirection('l')
 char Pacman::move(Maze & m, int y, int x)
 {
     char ** field = m.getField();
-    if (field[y][x] == 'X' || field[y][x] == '_')
-        return 'N';
     if (y < 0) { y = m.getFieldHeight() - 1; }
     if (y >= m.getFieldHeight()) { y = 0; }
     if (x < 0) { x = m.getFieldWidth() - 1; }
     if (x >= m.getFieldWidth()) { x = 0; }
+    if (field[y][x] == 'X' || field[y][x] == '_')
+        return 'N';
 
     field[this->y][this->x] = ' ';
     char old = field[y][x];
