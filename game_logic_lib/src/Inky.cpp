@@ -34,10 +34,14 @@ char Inky::newDirection(const Maze & m, const Pacman & p)
             return 'u';
         else if (py > y && f[y + 1][x] != 'X' && f[y + 1][x] != '_')
             return 'd';
-        else if (currentDirection == 'l' && f[y][x - 1] != 'X' && f[y][x - 1] != '_')
+        else if (currentDirection == 'l' &&
+                (x == 0 || (f[y][x - 1] != 'X' && f[y][x - 1] != '_')))
             return 'l';
-        else
+        else if (currentDirection == 'r' &&
+                (x == (m.getFieldWidth() - 1) || (f[y][x + 1] != 'X' && f[y][x + 1] != '_')))
             return 'r';
+        else
+            return (currentDirection == 'l') ? 'r' : 'l';
     }
     else
     {
@@ -45,10 +49,14 @@ char Inky::newDirection(const Maze & m, const Pacman & p)
             return 'l';
         else if (px > x && f[y][x + 1] != 'X' && f[y][x + 1] != '_')
             return 'r';
-        else if (currentDirection == 'u' && f[y - 1][x] != 'X' && f[y - 1][x] != '_')
+        else if (currentDirection == 'u' &&
+                (y == 0 || (f[y - 1][x] != 'X' && f[y - 1][x] != '_')))
             return 'u';
-        else
+        else if (currentDirection == 'd' &&
+                (y == (m.getFieldHeight() - 1) || (f[y + 1][x] != 'X' && f[y + 1][x] != '_')))
             return 'd';
+        else
+            return (currentDirection == 'u') ? 'd' : 'u';
     }
 }
 
