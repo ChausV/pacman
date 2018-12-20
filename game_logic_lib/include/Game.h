@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <utility>
+#include <vector>
 
 #include "Maze.h"
 #include "MazeHabitant.h"
@@ -41,6 +42,8 @@ private:
     Speedy ghost2;
     Inky ghost3;
     Clyde ghost4;
+
+    std::vector<Ghost*> ghosts;
 
 
     int score;

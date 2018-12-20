@@ -8,6 +8,7 @@ Game::Game() :  maze(),
                 ghost2(maze.getGhostSpawn().first, maze.getGhostSpawn().second, 'd', 'B'),
                 ghost3(maze.getGhostSpawn().first, maze.getGhostSpawn().second, 'd', 'S'),
                 ghost4(maze.getGhostSpawn().first, maze.getGhostSpawn().second, 'd', 'I'),
+                ghosts({&ghost, &ghost2, &ghost3, &ghost4}),
                 score(0), lives(5),
                 mld(nullptr), main_loop_state(true)
 {
@@ -64,26 +65,14 @@ void Game::collision()
     if(!--lives)
         main_loop_state = false;
 
-    ghost.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-    ghost.restoreExitCounter();
-    // ghost.setCurrDirection('d');
-
-    ghost2.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-    ghost2.restoreExitCounter();
-    // ghost2.setCurrDirection('d');
-
-    ghost3.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-    ghost3.restoreExitCounter();
-    // ghost3.setCurrDirection('d');
-
-    ghost4.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-    ghost4.restoreExitCounter();
-    // ghost4.setCurrDirection('d');
+    for(auto g : ghosts)
+    {
+        g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+        g->restoreExitCounter();
+    }
 
     pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
     pacman.setNextDirection('l');
-
-
 }
 
 void Game::processStep()
@@ -102,25 +91,13 @@ void Game::processStep()
         collision();
     }
 
-    where = ghost.moveStep(maze, pacman);
-    if (where == 'P')
+    for(auto g : ghosts)
     {
-        collision();
-    }
-    where = ghost2.moveStep(maze, pacman);
-    if (where == 'P')
-    {
-        collision();
-    }
-    where = ghost3.moveStep(maze, pacman);
-    if (where == 'P')
-    {
-        collision();
-    }
-    where = ghost4.moveStep(maze, pacman);
-    if (where == 'P')
-    {
-        collision();
+        where = g->moveStep(maze, pacman);
+        if (where == 'P')
+        {
+            collision();
+        }
     }
 
     ++mld->frames_counter;
@@ -137,27 +114,6 @@ bool Game::mainLoopProcessing(int input)
     {
         mld->input = input;
     }
-
-    // if (mld->frames_counter == 10)
-    // {
-    //     ghost.move(maze, 7, 12);
-    //     ghost.setCurrDirection('d');
-    // }
-    // if (mld->frames_counter == 20)
-    // {
-    //     ghost2.move(maze, 7, 10);
-    //     ghost2.setCurrDirection('d');
-    // }
-    // if (mld->frames_counter == 30)
-    // {
-    //     ghost3.move(maze, 7, 13);
-    //     ghost3.setCurrDirection('d');
-    // }
-    // if (mld->frames_counter == 40)
-    // {
-    //     ghost4.move(maze, 7, 9);
-    //     ghost4.setCurrDirection('d');
-    // }
 
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     float diff = std::chrono::duration_cast<std::chrono::duration<float>>(now - mld->start).count();
