@@ -7,7 +7,7 @@ class Maze;
 class MazeHabitant
 {
 public:
-    MazeHabitant();
+    MazeHabitant(int y, int x, char currDir = 'l');
     virtual ~MazeHabitant() = default;
     
     int getY() const;

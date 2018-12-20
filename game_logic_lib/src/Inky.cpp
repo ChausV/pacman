@@ -1,7 +1,8 @@
 #include "Inky.h"
 #include "cstdlib"
 
-Inky::Inky() : Ghost('I')
+Inky::Inky(int y, int x, char currDir, char stayOn, char name)
+     : Ghost(y, x, name, currDir, stayOn)
 {}
 
 char Inky::moveStep(Maze & m, Pacman & p)

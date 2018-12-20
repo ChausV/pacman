@@ -7,7 +7,7 @@
 class Ghost : public MazeHabitant
 {
 public:
-    Ghost(char name);
+    Ghost(int y, int x, char name, char currDir = 'd', char stayOn = ' ');
 
     char getStayOn() const;
     void setStayOn(char c);

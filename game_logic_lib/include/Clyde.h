@@ -6,7 +6,7 @@
 class Clyde : public Ghost
 {
 public:
-    Clyde();
+    Clyde(int y, int x, char currDir = 'd', char stayOn = ' ', char name = 'C');
 
     virtual char moveStep(Maze & m, Pacman & p);
 

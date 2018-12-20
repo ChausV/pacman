@@ -6,7 +6,7 @@
 class Inky : public Ghost
 {
 public:
-    Inky();
+    Inky(int y, int x, char currDir = 'd', char stayOn = ' ', char name = 'I');
 
     virtual char moveStep(Maze & m, Pacman & p);
 

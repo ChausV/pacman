@@ -1,7 +1,8 @@
 #include "Clyde.h"
 #include "random"
 
-Clyde::Clyde() : Ghost('C')
+Clyde::Clyde(int y, int x, char currDir, char stayOn, char name)
+     : Ghost(y, x, name, currDir, stayOn)
 {}
 
 char Clyde::moveStep(Maze & m, Pacman & p)

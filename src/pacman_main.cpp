@@ -13,8 +13,7 @@ int main()
 
     Game game;
 
-    std::pair<int, int> fieldSize = game.getGameFieldSize();
-    Display display(fieldSize.first, fieldSize.second);
+    Display display(game.getGameFieldSize().first, game.getGameFieldSize().second);
 
 
     while(game.getMainLoopState())

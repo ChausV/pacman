@@ -1,6 +1,7 @@
 #include "MazeHabitant.h"
 
-MazeHabitant::MazeHabitant() :  currentDirection('l')
+MazeHabitant::MazeHabitant(int y, int x, char currDir)
+	: y(y), x(x), currentDirection(currDir)
 {}
 
 char MazeHabitant::getCurrDirection() const { return currentDirection; }

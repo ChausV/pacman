@@ -1,6 +1,7 @@
 #include "Ghost.h"
 
-Ghost::Ghost(char name) : stayOn(' '), name(name)
+Ghost::Ghost(int y, int x, char name, char currDir, char stayOn)
+     : MazeHabitant(y, x, currDir), stayOn(stayOn), name(name)
 {}
 
 char Ghost::getStayOn() const { return stayOn; }

@@ -1,6 +1,7 @@
 #include "Speedy.h"
 
-Speedy::Speedy() : Ghost('S')
+Speedy::Speedy(int y, int x, char currDir, char stayOn, char name)
+     : Ghost(y, x, name, currDir, stayOn)
 {}
 
 char Speedy::moveStep(Maze & m, Pacman & p)

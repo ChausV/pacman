@@ -34,13 +34,14 @@ public:
 
 private:
 
-    Pacman pacman;
-    Blinky * ghost;
-    Speedy * ghost2;
-    Inky * ghost3;
-    Clyde * ghost4;
-
     Maze maze;
+
+    Pacman pacman;
+    Blinky ghost;
+    Speedy ghost2;
+    Inky ghost3;
+    Clyde ghost4;
+
 
     int score;
     int lives;

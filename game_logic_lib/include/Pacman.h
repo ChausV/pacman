@@ -6,7 +6,7 @@
 class Pacman : public MazeHabitant
 {
 public:
-    Pacman();
+    Pacman(int y, int x, char currDir = 'l', char nextDir = 'l');
 
     char getNextDirection() const;
     void setNextDirection(char c);
