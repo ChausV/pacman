@@ -6,7 +6,7 @@
 class Speedy : public Ghost
 {
 public:
-    Speedy(int y, int x, char currDir = 'd', char stayOn = ' ', char name = 'S');
+    Speedy(int y, int x, char currDir = 'd', char stayOn = ' ');
 
     virtual char moveStep(Maze & m, Pacman & p);
 

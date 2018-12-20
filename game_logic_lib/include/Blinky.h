@@ -6,7 +6,7 @@
 class Blinky : public Ghost
 {
 public:
-    Blinky(int y, int x, char currDir = 'd', char stayOn = ' ', char name = 'B');
+    Blinky(int y, int x, char currDir = 'd', char stayOn = ' ');
 
     virtual char moveStep(Maze & m, Pacman & p);
 

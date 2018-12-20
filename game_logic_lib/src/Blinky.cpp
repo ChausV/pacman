@@ -1,12 +1,16 @@
 #include "Blinky.h"
 
-Blinky::Blinky(int y, int x, char currDir, char stayOn, char name)
-     : Ghost(y, x, name, currDir, stayOn)
+Blinky::Blinky(int y, int x, char currDir, char stayOn)
+     : Ghost(y, x, currDir, stayOn, 'B', 1, 1)
 {}
 
 char Blinky::moveStep(Maze & m, Pacman & p)
 {
-    char where = makeCurrDirStep(m);
+    char where = checkExitCounter(m);
+    if (where != 'N')
+        return where;
+
+    where = makeCurrDirStep(m);
     if (where != 'N')
     {
         return where;

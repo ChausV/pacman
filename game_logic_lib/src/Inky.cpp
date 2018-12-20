@@ -1,19 +1,23 @@
 #include "Inky.h"
 #include "cstdlib"
 
-Inky::Inky(int y, int x, char currDir, char stayOn, char name)
-     : Ghost(y, x, name, currDir, stayOn)
+Inky::Inky(int y, int x, char currDir, char stayOn)
+     : Ghost(y, x, currDir, stayOn, 'I', 20, 20)
 {}
 
 char Inky::moveStep(Maze & m, Pacman & p)
 {
+    char where = checkExitCounter(m);
+    if (where != 'N')
+        return where;
+
     if (abs(x - p.getX()) > 2 && abs(y - p.getY()) > 2)
     {
         currentDirection = newDirection(m, p);
     }
     else
     {
-        char where = makeCurrDirStep(m);
+        where = makeCurrDirStep(m);
         if (where != 'N')
         {
             return where;

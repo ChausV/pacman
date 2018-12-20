@@ -1,12 +1,16 @@
 #include "Clyde.h"
 #include "random"
 
-Clyde::Clyde(int y, int x, char currDir, char stayOn, char name)
-     : Ghost(y, x, name, currDir, stayOn)
+Clyde::Clyde(int y, int x, char currDir, char stayOn)
+     : Ghost(y, x, currDir, stayOn, 'C', 30, 30)
 {}
 
 char Clyde::moveStep(Maze & m, Pacman & p)
 {
+    char where = checkExitCounter(m);
+    if (where != 'N')
+        return where;
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 10);
@@ -17,7 +21,7 @@ char Clyde::moveStep(Maze & m, Pacman & p)
     }
     else
     {
-        char where = makeCurrDirStep(m);
+        where = makeCurrDirStep(m);
         if (where != 'N')
         {
             return where;

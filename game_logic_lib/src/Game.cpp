@@ -64,19 +64,23 @@ void Game::collision()
     if(!--lives)
         main_loop_state = false;
 
-    ghost.move(maze, 7, 12);
-    ghost.setCurrDirection('d');
+    ghost.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost.restoreExitCounter();
+    // ghost.setCurrDirection('d');
 
-    ghost2.move(maze, 7, 10);
-    ghost2.setCurrDirection('d');
+    ghost2.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost2.restoreExitCounter();
+    // ghost2.setCurrDirection('d');
 
-    ghost3.move(maze, 7, 13);
-    ghost3.setCurrDirection('d');
+    ghost3.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost3.restoreExitCounter();
+    // ghost3.setCurrDirection('d');
 
-    ghost4.move(maze, 7, 9);
-    ghost4.setCurrDirection('d');
+    ghost4.move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost4.restoreExitCounter();
+    // ghost4.setCurrDirection('d');
 
-    pacman.move(maze, 17, 11);
+    pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
     pacman.setNextDirection('l');
 
 
@@ -134,26 +138,26 @@ bool Game::mainLoopProcessing(int input)
         mld->input = input;
     }
 
-    if (mld->frames_counter == 10)
-    {
-        ghost.move(maze, 7, 12);
-        ghost.setCurrDirection('d');
-    }
-    if (mld->frames_counter == 20)
-    {
-        ghost2.move(maze, 7, 10);
-        ghost2.setCurrDirection('d');
-    }
-    if (mld->frames_counter == 30)
-    {
-        ghost3.move(maze, 7, 13);
-        ghost3.setCurrDirection('d');
-    }
-    if (mld->frames_counter == 40)
-    {
-        ghost4.move(maze, 7, 9);
-        ghost4.setCurrDirection('d');
-    }
+    // if (mld->frames_counter == 10)
+    // {
+    //     ghost.move(maze, 7, 12);
+    //     ghost.setCurrDirection('d');
+    // }
+    // if (mld->frames_counter == 20)
+    // {
+    //     ghost2.move(maze, 7, 10);
+    //     ghost2.setCurrDirection('d');
+    // }
+    // if (mld->frames_counter == 30)
+    // {
+    //     ghost3.move(maze, 7, 13);
+    //     ghost3.setCurrDirection('d');
+    // }
+    // if (mld->frames_counter == 40)
+    // {
+    //     ghost4.move(maze, 7, 9);
+    //     ghost4.setCurrDirection('d');
+    // }
 
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     float diff = std::chrono::duration_cast<std::chrono::duration<float>>(now - mld->start).count();

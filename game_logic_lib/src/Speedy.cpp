@@ -1,12 +1,16 @@
 #include "Speedy.h"
 
-Speedy::Speedy(int y, int x, char currDir, char stayOn, char name)
-     : Ghost(y, x, name, currDir, stayOn)
+Speedy::Speedy(int y, int x, char currDir, char stayOn)
+     : Ghost(y, x, currDir, stayOn, 'S', 10, 10)
 {}
 
 char Speedy::moveStep(Maze & m, Pacman & p)
 {
-    char where = makeCurrDirStep(m);
+    char where = checkExitCounter(m);
+    if (where != 'N')
+        return where;
+
+    where = makeCurrDirStep(m);
     if (where != 'N')
     {
         return where;

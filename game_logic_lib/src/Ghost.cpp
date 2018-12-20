@@ -1,7 +1,9 @@
 #include "Ghost.h"
 
-Ghost::Ghost(int y, int x, char name, char currDir, char stayOn)
-     : MazeHabitant(y, x, currDir), stayOn(stayOn), name(name)
+Ghost::Ghost(int y, int x, char currDir, char stayOn,
+                char name, int exitCntr, int defExitCntr)
+     : MazeHabitant(y, x, currDir), stayOn(stayOn), name(name),
+        exitCounter(exitCntr), defaultExitCounter(defExitCntr)
 {}
 
 char Ghost::getStayOn() const { return stayOn; }
@@ -40,4 +42,27 @@ char Ghost::move(Maze & m, int y, int x)
     this->y = y;
     this->x = x;
     return stayOn;
+}
+
+char Ghost::checkExitCounter(Maze & m)
+{
+    if (exitCounter > 0)
+    {
+        --exitCounter;
+        return 'N';
+    }
+    else if (exitCounter == 0)
+    {
+        --exitCounter;
+        return move(m, m.getGhostStart().first, m.getGhostStart().second);
+    }
+    else
+    {
+        return 'N';
+    }
+}
+
+void Ghost::restoreExitCounter()
+{
+    exitCounter = defaultExitCounter;
 }
