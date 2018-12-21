@@ -10,6 +10,13 @@ char Blinky::moveStep(Maze & m, Pacman & p)
     if (where != 'N')
         return where;
 
+    if (scareCounter)
+    {
+        --scareCounter;
+        currentDirection = scareDirection(m);
+        return makeCurrDirStep(m);
+    }
+
     where = makeCurrDirStep(m);
     if (where != 'N')
     {

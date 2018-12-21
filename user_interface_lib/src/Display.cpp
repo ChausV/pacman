@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-Display::Display(int field_h, int field_w) : game_field_h(field_h),
-                                            game_field_w(field_w)
+Display::Display(int field_h, int field_w)
+     : win(nullptr), game_field_h(field_h), game_field_w(field_w)
 {
     std::cout << "Constructor Display" << std::endl;
 
@@ -117,6 +117,11 @@ void Display::displayField(char ** field) const
             {
                 mvwaddch(win, i + 1, 2 * j + 1, ' ' | COLOR_PAIR(6));
                 mvwaddch(win, i + 1, 2 * j + 2, ' ' | COLOR_PAIR(6));
+            }
+            else if (field[i][j] == 'G')
+            {
+                mvwaddch(win, i + 1, 2 * j + 1, 'O' | COLOR_PAIR(1));
+                mvwaddch(win, i + 1, 2 * j + 2, 'O' | COLOR_PAIR(1));
             }
             else if (field[i][j] == '_')
             {

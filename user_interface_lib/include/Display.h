@@ -7,7 +7,10 @@ class Display
 {
 public:
     Display(int field_h, int field_w);
+    // Display();
     ~Display();
+
+    // void setFieldSize(int field_h, int field_w);
 
     int getUserInput() const;
 

@@ -58,6 +58,7 @@ bool Maze::readMapFile(vecStr & sm)
             sm.push_back(temp);
         }
     }
+    ifs.close();
     return true;
 }
 

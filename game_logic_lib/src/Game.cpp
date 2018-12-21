@@ -82,21 +82,52 @@ void Game::processStep()
     {
         score += 10;
     }
-        if (where == 'o')
+    else if (where == 'o')
     {
         score += 50;
+        for(auto g : ghosts)
+        {
+            g->setScareCount(20);
+            g->oppositeDirection();
+        }
     }
     else if (where == 'B' || where == 'S' || where == 'I' || where == 'C')
     {
         collision();
     }
+    else if (where == 'G')
+    {
+        score += 200;
+        for(auto g : ghosts)
+        {
+            if (pacman.getX() == g->getX() && pacman.getY() == g->getY())
+            {
+                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+                g->restoreExitCounter();
+                g->setScareCount(0);
+            }
+        }
+        // crutch from pacman blinking here
+        (maze.getField())[pacman.getY()][pacman.getX()] = 'P';  // ugly things )
+    }
 
     for(auto g : ghosts)
     {
+        if (g->getScareCount() && mld->frames_counter % 2)
+            continue;
         where = g->moveStep(maze, pacman);
         if (where == 'P')
         {
-            collision();
+            if (g->getScareCount())
+            {
+                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+                g->restoreExitCounter();
+                g->setScareCount(0);
+            }
+            else
+            {
+                collision();
+            }
         }
     }
 
@@ -153,7 +184,7 @@ bool Game::mainLoopProcessing(int input)
         }
         mld->input = -1;
 
-        mld->game_time += 0.2f;
+        mld->game_time += 0.25f;
 
         return true;
     }

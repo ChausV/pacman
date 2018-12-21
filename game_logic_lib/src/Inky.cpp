@@ -11,6 +11,13 @@ char Inky::moveStep(Maze & m, Pacman & p)
     if (where != 'N')
         return where;
 
+    if (scareCounter)
+    {
+        --scareCounter;
+        currentDirection = scareDirection(m);
+        return makeCurrDirStep(m);
+    }
+
     if (abs(x - p.getX()) > 2 && abs(y - p.getY()) > 2)
     {
         currentDirection = newDirection(m, p);

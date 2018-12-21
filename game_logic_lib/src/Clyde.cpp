@@ -11,6 +11,13 @@ char Clyde::moveStep(Maze & m, Pacman & p)
     if (where != 'N')
         return where;
 
+    if (scareCounter)
+    {
+        --scareCounter;
+        currentDirection = scareDirection(m);
+        return makeCurrDirStep(m);
+    }
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(1, 10);

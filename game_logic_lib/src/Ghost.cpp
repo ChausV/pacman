@@ -1,13 +1,18 @@
 #include "Ghost.h"
+#include <random>
 
 Ghost::Ghost(int y, int x, char currDir, char stayOn,
-                char name, int exitCntr, int defExitCntr)
+                char name, int exitCntr, int defExitCntr,
+                int scareCnt)
      : MazeHabitant(y, x, currDir), stayOn(stayOn), name(name),
-        exitCounter(exitCntr), defaultExitCounter(defExitCntr)
+        exitCounter(exitCntr), defaultExitCounter(defExitCntr),
+        scareCounter(scareCnt)
 {}
 
 char Ghost::getStayOn() const { return stayOn; }
 void Ghost::setStayOn(char c) { stayOn = c; }
+int Ghost::getScareCount() const { return scareCounter; }
+void Ghost::setScareCount(int sc) { scareCounter = sc; }
 
 
 char Ghost::makeCurrDirStep(Maze & m)
@@ -32,13 +37,16 @@ char Ghost::move(Maze & m, int y, int x)
         return 'N';
 
     if (stayOn != 'B' && stayOn != 'S' && stayOn != 'I' &&
-        stayOn != 'C' && stayOn != 'P')
+        stayOn != 'C' && stayOn != 'P' && stayOn != 'G')
     {
         // this is (not crutch) for correct ghosts overlaying
         field[this->y][this->x] = stayOn;
     }
     stayOn = field[y][x];
-    field[y][x] = name;
+    if (scareCounter)
+        field[y][x] = 'G';
+    else
+        field[y][x] = name;
     this->y = y;
     this->x = x;
     return stayOn;
@@ -61,8 +69,60 @@ char Ghost::checkExitCounter(Maze & m)
         return 'N';
     }
 }
+    
+void Ghost::oppositeDirection()
+{
+    if (currentDirection == 'l')
+        currentDirection = 'r';
+    else if (currentDirection == 'r')
+        currentDirection = 'l';
+    else if (currentDirection == 'u')
+        currentDirection = 'd';
+    else if (currentDirection == 'd')
+        currentDirection = 'u';
+}
 
 void Ghost::restoreExitCounter()
 {
     exitCounter = defaultExitCounter;
+}
+
+char Ghost::scareDirection(const Maze & m)
+{
+    char ** f = m.getField();
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 9);
+
+    if (currentDirection == 'l' || currentDirection == 'r')
+    {
+        if (dis(gen) < 4 && f[y - 1][x] != 'X' && f[y - 1][x] != '_')
+            return 'u';
+        else if (dis(gen) > 4 && f[y + 1][x] != 'X' && f[y + 1][x] != '_')
+            return 'd';
+        else if (currentDirection == 'l' &&
+                (x == 0 || (f[y][x - 1] != 'X' && f[y][x - 1] != '_')))
+            return 'l';
+        else if (currentDirection == 'r' &&
+                (x == (m.getFieldWidth() - 1) || (f[y][x + 1] != 'X' && f[y][x + 1] != '_')))
+            return 'r';
+        else
+            return (currentDirection == 'l') ? 'r' : 'l';
+    }
+    else
+    {
+        if (dis(gen) < 4 && f[y][x - 1] != 'X' && f[y][x - 1] != '_')
+            return 'l';
+        else if (dis(gen) > 4 && f[y][x + 1] != 'X' && f[y][x + 1] != '_')
+            return 'r';
+        else if (currentDirection == 'u' &&
+                (y == 0 || (f[y - 1][x] != 'X' && f[y - 1][x] != '_')))
+            return 'u';
+        else if (currentDirection == 'd' &&
+                (y == (m.getFieldHeight() - 1) || (f[y + 1][x] != 'X' && f[y + 1][x] != '_')))
+            return 'd';
+        else
+            return (currentDirection == 'u') ? 'd' : 'u';
+    }
 }
