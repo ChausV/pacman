@@ -20,6 +20,9 @@ public:
     std::pair<int, int> getGhostStart() const;
 
     int getDotNumber() const;
+    void decrementDotNumber();
+
+    void reloadMap();
 
 private:
 

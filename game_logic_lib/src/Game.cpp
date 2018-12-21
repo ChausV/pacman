@@ -1,5 +1,10 @@
 #include "Game.h"
 
+
+#include <ncurses.h>
+
+
+
 #include <iostream>
 
 Game::Game() :  maze(),
@@ -81,14 +86,62 @@ void Game::processStep()
     if (where == '.')
     {
         score += 10;
+        maze.decrementDotNumber();
+
+            mvprintw(40, 5, "dots: %d", maze.getDotNumber());
+            refresh();
+
+        if (maze.getDotNumber() == 0)
+        {
+            maze.reloadMap();
+            for(auto g : ghosts)
+            {
+                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+                g->restoreExitCounter();
+                g->setScareCount(0);
+                g->setCurrDirection('d');
+            }
+            int xPr = pacman.getX();
+            int yPr = pacman.getY();
+
+            pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
+            pacman.setNextDirection('l');
+
+            // one more crutch
+            (maze.getField())[yPr][xPr] = '.';
+        }
     }
     else if (where == 'o')
     {
         score += 50;
-        for(auto g : ghosts)
+        maze.decrementDotNumber();
+
+        if (maze.getDotNumber() == 0)
         {
-            g->setScareCount(20);
-            g->oppositeDirection();
+            maze.reloadMap();
+            for(auto g : ghosts)
+            {
+                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+                g->restoreExitCounter();
+                g->setScareCount(0);
+                g->setCurrDirection('d');
+            }
+            int xPr = pacman.getX();
+            int yPr = pacman.getY();
+
+            pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
+            pacman.setNextDirection('l');
+
+            // one more crutch
+            (maze.getField())[yPr][xPr] = 'o';
+        }
+        else
+        {
+            for(auto g : ghosts)
+            {
+                g->setScareCount(20);
+                g->oppositeDirection();
+            }
         }
     }
     else if (where == 'B' || where == 'S' || where == 'I' || where == 'C')

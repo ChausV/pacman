@@ -10,7 +10,7 @@ public:
     // Display();
     ~Display();
 
-    // void setFieldSize(int field_h, int field_w);
+    void setFieldSize(int field_h, int field_w);
 
     int getUserInput() const;
 

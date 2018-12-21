@@ -43,6 +43,12 @@ Display::~Display()
     std::cout << "Destructor Display" << std::endl;
 }
 
+void Display::setFieldSize(int field_h, int field_w)
+{
+    game_field_h = field_h;
+    game_field_w = field_w;
+}
+
 int Display::getUserInput() const
 {
     return getch();

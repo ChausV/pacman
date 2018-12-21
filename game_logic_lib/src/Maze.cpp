@@ -134,6 +134,33 @@ bool Maze::interpretAndValidateMap(vecStr & sm)
     return true;
 }
 
+void Maze::reloadMap()
+{
+    for(int i = 0; i < field_h; ++i)
+    {
+        delete [] field[i];
+    }
+    delete [] field;
+
+
+    dotNumber = 0;
+
+    vecStr strMap;
+
+    if (!readMapFile(strMap))
+    {
+        std::cerr << "Map-file open failed. Try to place binary in project directory." <<  std::endl;
+        exit(1);
+    }
+
+    // not deep validation, main aspects only
+    if (!interpretAndValidateMap(strMap))
+    {
+        std::cerr << "Map is not valid." << std::endl;
+        exit(1);
+    }
+}
+
 int Maze::getFieldHeight() const {
     return field_h;
 }
@@ -156,4 +183,10 @@ std::pair<int, int> Maze::getGhostStart() const {
 
 int Maze::getDotNumber() const {
     return dotNumber;
+}
+
+void Maze::decrementDotNumber()
+{
+    if (dotNumber > 0)
+        --dotNumber;
 }
