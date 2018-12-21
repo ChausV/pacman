@@ -39,10 +39,10 @@ Maze::~Maze()
 
 bool Maze::readMapFile(vecStr & sm)
 {
-    std::ifstream ifs("../maps/map1.map");
+    std::ifstream ifs("../maps/map2.map");
     if (!ifs.good())
     {
-        ifs.open("./maps/map1.map");
+        ifs.open("./maps/map2.map");
         if (!ifs.good())
         {
             return false;

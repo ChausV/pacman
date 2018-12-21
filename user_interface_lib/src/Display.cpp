@@ -50,13 +50,13 @@ int Display::getUserInput() const
 
 void Display::displayScore(int score) const
 {
-    mvprintw(3, 25, "Score: %d", score);
+    mvprintw(3, 30, "Score: %d", score);
     refresh();
 }
 
 void Display::displayLives(int lives) const
 {
-    mvprintw(30, 5, "Lives: %d", lives);
+    mvprintw(game_field_h + 7, 5, "Lives: %d", lives);
     refresh();
 }
 
@@ -68,7 +68,7 @@ void Display::displayCounter(unsigned counter) const
 
 void Display::displayTime(float time) const
 {
-    mvprintw(30, 30, "time: %f", time);
+    mvprintw(game_field_h + 7, 30, "time: %f", time);
     refresh();
 }
 
