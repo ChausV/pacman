@@ -22,7 +22,7 @@ public:
     int getDotNumber() const;
     void decrementDotNumber();
 
-    void reloadMap();
+    void reloadMap(int level);
 
 private:
 
@@ -38,7 +38,7 @@ private:
     pairInt ghostSpawn;
     pairInt ghostStart;
 
-    bool readMapFile(vecStr & sm);
+    bool readMapFile(vecStr & sm, int level);
     bool interpretAndValidateMap(vecStr & sm);
 
 };

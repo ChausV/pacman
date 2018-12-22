@@ -27,6 +27,7 @@ public:
     unsigned getFramesCounter() const;
     float getGameTime() const;
     int getGameLives() const;
+    int getGameLevel() const;
 
 
 
@@ -48,6 +49,7 @@ private:
 
     int score;
     int lives;
+    int level;
 
     MainLoopData * mld;
 

@@ -27,7 +27,6 @@ Display::Display(int field_h, int field_w)
 
     win = newwin(field_h + 2, 2 * field_w + 2, 5, 5);
 
-    box(win, 0, 0);
     wrefresh(win);
 
 }
@@ -45,8 +44,16 @@ Display::~Display()
 
 void Display::setFieldSize(int field_h, int field_w)
 {
+    if (game_field_h == field_h && game_field_w == field_w)
+        return ;
+
     game_field_h = field_h;
     game_field_w = field_w;
+
+    delwin(win);
+    clear();
+    win = newwin(field_h + 2, 2 * field_w + 2, 5, 5);
+    wrefresh(win);
 }
 
 int Display::getUserInput() const
@@ -75,6 +82,12 @@ void Display::displayCounter(unsigned counter) const
 void Display::displayTime(float time) const
 {
     mvprintw(game_field_h + 7, 30, "time: %f", time);
+    refresh();
+}
+
+void Display::displayLevel(int level) const
+{
+    mvprintw(3, 45, "Level: %d", level);
     refresh();
 }
 

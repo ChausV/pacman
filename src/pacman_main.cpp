@@ -21,11 +21,14 @@ int main()
     {
         if (game.mainLoopProcessing(display.getUserInput()))
         {
+            display.setFieldSize(game.getGameFieldSize().first, game.getGameFieldSize().second);
+
             display.displayField(game.getGameField());
             display.displayScore(game.getGameScore());
             display.displayLives(game.getGameLives());
             display.displayCounter(game.getFramesCounter());
             display.displayTime(game.getGameTime());
+            display.displayLevel(game.getGameLevel());
         }
     }
 

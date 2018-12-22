@@ -19,6 +19,7 @@ public:
     void displayLives(int lives) const;
     void displayCounter(unsigned counter) const;
     void displayTime(float time) const;
+    void displayLevel(int level) const;
 private:
     WINDOW * win;
 

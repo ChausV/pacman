@@ -11,7 +11,7 @@ Maze::Maze() : field_h(0), field_w(0), field(nullptr),
 {
     vecStr strMap;
 
-    if (!readMapFile(strMap))
+    if (!readMapFile(strMap, 1))
     {
         std::cerr << "Map-file open failed. Try to place binary in project directory." <<  std::endl;
         exit(1);
@@ -37,12 +37,21 @@ Maze::~Maze()
     std::cout << "Destructor Maze" << std::endl;
 }
 
-bool Maze::readMapFile(vecStr & sm)
+bool Maze::readMapFile(vecStr & sm, int level)
 {
-    std::ifstream ifs("../maps/map2.map");
+    constexpr int mapNum = 7;
+    int lvl = level % mapNum;
+    if (lvl == 0) { lvl = mapNum; }
+    std::string path("./maps/map");
+    // std::string path("./maps/twodots_map");
+    path += std::to_string(lvl);
+    path += ".map";     // implicit string constructor used here
+
+    std::ifstream ifs("." + path);
+    // std::ifstream ifs("../maps/map6.map");
     if (!ifs.good())
     {
-        ifs.open("./maps/map2.map");
+        ifs.open(path);
         if (!ifs.good())
         {
             return false;
@@ -134,7 +143,7 @@ bool Maze::interpretAndValidateMap(vecStr & sm)
     return true;
 }
 
-void Maze::reloadMap()
+void Maze::reloadMap(int level)
 {
     for(int i = 0; i < field_h; ++i)
     {
@@ -145,7 +154,7 @@ void Maze::reloadMap()
     dotNumber = 0;
     vecStr strMap;
 
-    if (!readMapFile(strMap))
+    if (!readMapFile(strMap, level))
     {
         // invisible messaged due to ncurses mode
         std::cerr << "Map-file open failed." <<  std::endl;

@@ -1,0 +1,44 @@
+
+# This line is a comment. For correct comment the very first character is '#'.
+# Empty lines (zero length) are ignored.
+
+# First line must represent map height. Second - map width.
+# After that comes map line by line.
+
+# Valid map characters:
+# 'X' - wall;
+# '.' - dot (pacman's food);
+# 'o' - so called "energizer";
+# ' ' - empty place;
+# 'P' - pacman start place;
+# '_' - door.
+
+# Exactly one 'P' and exactly one '_' are allowed.
+# Not less than one '.' must be present.
+# Note that cell exactly below the door and cell exactly above the door must be empty.
+
+23
+23
+XXXXXXXXXXXXXXXXXXXXXXX
+X          X          X
+X XXX XXXX X XXXX XXX X
+X                     X
+X XXX X XXXXXXX X XXX X
+X     X    X    X     X
+XXXXX XXXX X XXXX XXXXX
+    X X         X X    
+    X X XXX_XXX X X    
+XXXXX X X     X X XXXXX
+        X     X        
+XXXXX X X     X X XXXXX
+    X X XXXXXXX X X    
+    X X         X X    
+XXXXX X XXXXXXX X XXXXX
+X          X          X
+X XXX XXXX X XXXX XXX X
+X   X......P      X   X
+XXX X X XXXXXXX X X XXX
+X     X    X    X     X
+X XXXXXXXX X XXXXXXXX X
+X                     X
+XXXXXXXXXXXXXXXXXXXXXXX

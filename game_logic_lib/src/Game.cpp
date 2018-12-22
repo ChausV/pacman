@@ -14,7 +14,7 @@ Game::Game() :  maze(),
                 ghost3(maze.getGhostSpawn().first, maze.getGhostSpawn().second, 'd', 'S'),
                 ghost4(maze.getGhostSpawn().first, maze.getGhostSpawn().second, 'd', 'I'),
                 ghosts({&ghost, &ghost2, &ghost3, &ghost4}),
-                score(0), lives(5),
+                score(0), lives(5), level(1),
                 mld(nullptr), main_loop_state(true)
 {
     std::cout << "Constructor Game" << std::endl;
@@ -48,6 +48,9 @@ float Game::getGameTime() const {
 }
 int Game::getGameLives() const {
     return lives;
+}
+int Game::getGameLevel() const {
+    return level;
 }
 
 
@@ -143,7 +146,9 @@ void Game::collision()
 
 void Game::changeLevel()
 {
-    maze.reloadMap();
+    ++level;
+
+    maze.reloadMap(level);
 
     // move() is bad here in case of other map
     pacman.setY(maze.getPacmanStart().first);
