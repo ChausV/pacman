@@ -147,6 +147,8 @@ void Game::collision()
 void Game::changeLevel()
 {
     ++level;
+    if (mld->frame_time > 0.09f)
+        mld->frame_time -= 0.02f;
 
     maze.reloadMap(level);
 
@@ -263,7 +265,7 @@ bool Game::mainLoopProcessing(int input)
         }
         mld->input = -1;
 
-        mld->game_time += 0.25f;
+        mld->game_time += mld->frame_time;
 
         return true;
     }

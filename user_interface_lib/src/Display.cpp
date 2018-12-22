@@ -75,13 +75,13 @@ void Display::displayLives(int lives) const
 
 void Display::displayCounter(unsigned counter) const
 {
-    mvprintw(3, 5, "Counter: %d", counter);
+    mvprintw(3, 5, "Frames: %d", counter);
     refresh();
 }
 
 void Display::displayTime(float time) const
 {
-    mvprintw(game_field_h + 7, 30, "time: %f", time);
+    mvprintw(game_field_h + 7, 30, "time: %.2f seconds", time);
     refresh();
 }
 

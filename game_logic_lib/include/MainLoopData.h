@@ -17,13 +17,16 @@ struct MainLoopData
 
     float game_time;
 
+    float frame_time;
+
     MainLoopData()
         : input(0),
           frames_counter(0u),
           // main_loop_state(true),
           start(std::chrono::steady_clock::now()),
           pause(false),
-          game_time(0.0f)
+          game_time(0.0f),
+          frame_time(0.25f)
     {}
 };
 

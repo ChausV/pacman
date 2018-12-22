@@ -95,7 +95,7 @@ bool Maze::interpretAndValidateMap(vecStr & sm)
             return false;
     }
 
-    // memoty allocation for field member attribute.
+    // memory allocation for field member attribute.
     // allocation error is unlikely, so let it be wrong error message this time
     if (!(field = new (std::nothrow) char*[field_h]))
         return false;
@@ -157,6 +157,7 @@ void Maze::reloadMap(int level)
     if (!readMapFile(strMap, level))
     {
         // invisible messaged due to ncurses mode
+        // not really correct exit. terminal will need reboot
         std::cerr << "Map-file open failed." <<  std::endl;
         exit(1);
     }
