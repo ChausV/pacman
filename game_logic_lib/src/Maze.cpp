@@ -17,7 +17,7 @@ Maze::Maze() : field_h(0), field_w(0), field(nullptr),
         exit(1);
     }
 
-    // not deep validation, main aspects only
+    // poor validation, main aspects only
     if (!interpretAndValidateMap(strMap))
     {
         std::cerr << "Map is not valid." << std::endl;
@@ -142,18 +142,15 @@ void Maze::reloadMap()
     }
     delete [] field;
 
-
     dotNumber = 0;
-
     vecStr strMap;
 
     if (!readMapFile(strMap))
     {
-        std::cerr << "Map-file open failed. Try to place binary in project directory." <<  std::endl;
+        // invisible messaged due to ncurses mode
+        std::cerr << "Map-file open failed." <<  std::endl;
         exit(1);
     }
-
-    // not deep validation, main aspects only
     if (!interpretAndValidateMap(strMap))
     {
         std::cerr << "Map is not valid." << std::endl;

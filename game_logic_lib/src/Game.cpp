@@ -65,19 +65,99 @@ void Game::pacmanDown() {
 }
 
 
+void Game::eatDot()
+{
+    score += 10;
+    maze.decrementDotNumber();
+    if (maze.getDotNumber() == 0)
+    {
+        changeLevel();
+    }
+}
+
+void Game::eatCookie()
+{
+    score += 50;
+    maze.decrementDotNumber();
+
+    if (maze.getDotNumber() == 0)
+    {
+        changeLevel();
+    }
+    else
+    {
+        for(auto g : ghosts)
+        {
+            g->setScareCount(20);
+            g->oppositeDirection();
+        }
+    }
+}
+
+void Game::pacmanToStart()
+{
+    pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
+    pacman.setNextDirection('l');
+}
+
+void Game::ghostToSpawn(Ghost * ghost)
+{
+    ghost->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost->restoreExitCounter();
+    ghost->setScareCount(0);
+    ghost->setCurrDirection('d');
+}
+
+void Game::scaredGhostToSpawn(Ghost * ghost)
+{
+    if (ghost->getStayOn() == '.')
+    {
+        eatDot();
+    }
+    if (ghost->getStayOn() == 'o')
+    {
+        eatCookie();
+    }
+
+    ghost->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
+    ghost->restoreExitCounter();
+    ghost->setScareCount(0);
+    ghost->setCurrDirection('d');
+
+    // crutch from pacman blinking here
+    (maze.getField())[pacman.getY()][pacman.getX()] = 'P';  // ugly things )
+}
+
 void Game::collision()
 {
     if(!--lives)
         main_loop_state = false;
 
+    pacmanToStart();
+
     for(auto g : ghosts)
     {
-        g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-        g->restoreExitCounter();
+        ghostToSpawn(g);
     }
+}
 
-    pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
+void Game::changeLevel()
+{
+    maze.reloadMap();
+
+    // move() is bad here in case of other map
+    pacman.setY(maze.getPacmanStart().first);
+    pacman.setX(maze.getPacmanStart().second);
     pacman.setNextDirection('l');
+
+    for(auto g : ghosts)
+    {
+        g->setY(maze.getGhostSpawn().first);
+        g->setX(maze.getGhostSpawn().second);
+        g->restoreExitCounter();
+        g->setScareCount(0);
+        g->setCurrDirection('d');
+    }
 }
 
 void Game::processStep()
@@ -85,64 +165,11 @@ void Game::processStep()
     char where = pacman.moveStep(maze);
     if (where == '.')
     {
-        score += 10;
-        maze.decrementDotNumber();
-
-            mvprintw(40, 5, "dots: %d", maze.getDotNumber());
-            refresh();
-
-        if (maze.getDotNumber() == 0)
-        {
-            maze.reloadMap();
-            for(auto g : ghosts)
-            {
-                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-                g->restoreExitCounter();
-                g->setScareCount(0);
-                g->setCurrDirection('d');
-            }
-            int xPr = pacman.getX();
-            int yPr = pacman.getY();
-
-            pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
-            pacman.setNextDirection('l');
-
-            // one more crutch
-            (maze.getField())[yPr][xPr] = '.';
-        }
+        eatDot();
     }
     else if (where == 'o')
     {
-        score += 50;
-        maze.decrementDotNumber();
-
-        if (maze.getDotNumber() == 0)
-        {
-            maze.reloadMap();
-            for(auto g : ghosts)
-            {
-                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-                g->restoreExitCounter();
-                g->setScareCount(0);
-                g->setCurrDirection('d');
-            }
-            int xPr = pacman.getX();
-            int yPr = pacman.getY();
-
-            pacman.move(maze, maze.getPacmanStart().first, maze.getPacmanStart().second);
-            pacman.setNextDirection('l');
-
-            // one more crutch
-            (maze.getField())[yPr][xPr] = 'o';
-        }
-        else
-        {
-            for(auto g : ghosts)
-            {
-                g->setScareCount(20);
-                g->oppositeDirection();
-            }
-        }
+        eatCookie();
     }
     else if (where == 'B' || where == 'S' || where == 'I' || where == 'C')
     {
@@ -155,13 +182,9 @@ void Game::processStep()
         {
             if (pacman.getX() == g->getX() && pacman.getY() == g->getY())
             {
-                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-                g->restoreExitCounter();
-                g->setScareCount(0);
+                scaredGhostToSpawn(g);
             }
         }
-        // crutch from pacman blinking here
-        (maze.getField())[pacman.getY()][pacman.getX()] = 'P';  // ugly things )
     }
 
     for(auto g : ghosts)
@@ -173,9 +196,7 @@ void Game::processStep()
         {
             if (g->getScareCount())
             {
-                g->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
-                g->restoreExitCounter();
-                g->setScareCount(0);
+                scaredGhostToSpawn(g);
             }
             else
             {

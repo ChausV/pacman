@@ -59,8 +59,16 @@ private:
     void pacmanUp();
     void pacmanDown();
 
+    void eatDot();
+    void eatCookie();
+
+    void pacmanToStart();
+    void ghostToSpawn(Ghost * ghost);
+    void scaredGhostToSpawn(Ghost * ghost);
+
     void processStep();
     void collision();
+    void changeLevel();
 
 };
 
