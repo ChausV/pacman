@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 set(UI_LIBRARY_NAME "uincurses")
 set(UI_LIBRARY_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Display.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/DisplayGame.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

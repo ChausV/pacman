@@ -21,7 +21,7 @@ Maze::Maze() : field_h(0), field_w(0), field(nullptr),
     if (!interpretAndValidateMap(strMap))
     {
         std::cerr << "Map is not valid." << std::endl;
-        exit(1);
+        exit(2);
     }
 
     std::cout << "Constructor Maze" << std::endl;
@@ -43,6 +43,7 @@ bool Maze::readMapFile(vecStr & sm, int level)
     int lvl = level % mapNum;
     if (lvl == 0) { lvl = mapNum; }
     std::string path("./maps/map");
+    // std::string path("./maps/testmap");
     // std::string path("./maps/twodots_map");
     path += std::to_string(lvl);
     path += ".map";     // implicit string constructor used here
@@ -159,12 +160,12 @@ void Maze::reloadMap(int level)
         // invisible messaged due to ncurses mode
         // not really correct exit. terminal will need reboot
         std::cerr << "Map-file open failed." <<  std::endl;
-        exit(1);
+        exit(3);
     }
     if (!interpretAndValidateMap(strMap))
     {
         std::cerr << "Map is not valid." << std::endl;
-        exit(1);
+        exit(4);
     }
 }
 

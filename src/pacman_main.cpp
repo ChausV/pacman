@@ -14,16 +14,18 @@ int main()
 {
 
     Game game;
+    Display display;
 
-    Display display(game.getGameFieldSize().first, game.getGameFieldSize().second);
+
+    display.startGameDisplay(game.getGameFieldSize().first, game.getGameFieldSize().second);
 
     while(game.getMainLoopState())
     {
         if (game.mainLoopProcessing(display.getUserInput()))
         {
-            display.setFieldSize(game.getGameFieldSize().first, game.getGameFieldSize().second);
+            display.setGameFieldSize(game.getGameFieldSize().first, game.getGameFieldSize().second);
 
-            display.displayField(game.getGameField());
+            display.displayGameField(game.getGameField());
             display.displayScore(game.getGameScore());
             display.displayLives(game.getGameLives());
             display.displayCounter(game.getFramesCounter());
@@ -31,6 +33,8 @@ int main()
             display.displayLevel(game.getGameLevel());
         }
     }
+
+    display.endGameDisplay();
 
     return 0;
 }
