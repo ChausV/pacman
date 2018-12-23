@@ -9,7 +9,6 @@ public:
     Display();
     ~Display();
 
-
     int getUserInput() const;
 
     void startGameDisplay(int field_h, int field_w);

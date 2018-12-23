@@ -10,15 +10,11 @@
 
 Display::Display()
      : displayGame(nullptr)
-{
-    std::cout << "Constructor Display" << std::endl;
-}
+{}
 
 Display::~Display()
 {
     delete displayGame;     // just to be on the safe side
-
-    std::cout << "Destructor Display" << std::endl;
 }
 
 
@@ -89,7 +85,6 @@ void Display::showHighScores(WINDOW * win) const
         mvwprintw(win, i + 7, 12, "%s", (*it).second.c_str());
         mvwprintw(win, i + 7, 25, "%d", (*it).first);
     }
-
     wrefresh(win);
 
     getch();
@@ -98,41 +93,40 @@ void Display::showHighScores(WINDOW * win) const
 bool Display::mainMenu()
 {
     MainMenu mainMenu;
-
     WINDOW * menuWin = mainMenu.getWin();
 
-    int     selector = 1;
-    while(1)
+    int selector{1};
+    while(true)
     {
         if (selector % 3 == 1)
         {
             wattron(menuWin, A_REVERSE);
-            mvwprintw(menuWin, 8, 16, "     PLAY      ");
+            mvwprintw(menuWin, 8, 13, "     PLAY      ");
             wattroff(menuWin, A_REVERSE); 
         }
         else
         {
-            mvwprintw(menuWin, 8, 16, "     PLAY      ");
+            mvwprintw(menuWin, 8, 13, "     PLAY      ");
         }
         if (selector % 3 == 2)
         {
             wattron(menuWin, A_REVERSE);
-            mvwprintw(menuWin, 10, 16, "  HIGH SCORES  ");
+            mvwprintw(menuWin, 10, 13, "  HIGH SCORES  ");
             wattroff(menuWin, A_REVERSE); 
         }
         else
         {
-            mvwprintw(menuWin, 10, 16, "  HIGH SCORES  ");
+            mvwprintw(menuWin, 10, 13, "  HIGH SCORES  ");
         }
         if (selector % 3 == 0)
         {
             wattron(menuWin, A_REVERSE);
-            mvwprintw(menuWin, 12, 16, "     EXIT      ");
+            mvwprintw(menuWin, 12, 13, "     EXIT      ");
             wattroff(menuWin, A_REVERSE); 
         }
         else
         {
-            mvwprintw(menuWin, 12, 16, "     EXIT      ");
+            mvwprintw(menuWin, 12, 13, "     EXIT      ");
         }
         wrefresh(menuWin);
 
@@ -151,9 +145,7 @@ bool Display::mainMenu()
                 {
                     showHighScores(menuWin);
                     wclear(menuWin);
-                    // refresh();
                     mainMenu.refreshMenuScreen();
-                    // wrefresh(menuWin);
                 }
                 else
                 {
@@ -163,21 +155,19 @@ bool Display::mainMenu()
                 }
                 break;
             default:
-                mvwprintw(menuWin, 20, 5, "Up and down arrows to choose");
-                mvwprintw(menuWin, 21, 10, "Enter to submit");
+                mvwprintw(menuWin, 20, 6, "Up and down arrows to choose");
+                mvwprintw(menuWin, 21, 13, "Enter to submit");
                 wrefresh(menuWin);
                 break;
         }
     }
     return true;
-
 }
 
 void Display::gameOverFrame(int score)
 {
     GameOverScreen goScreen;
     HighScores hs;
-
     WINDOW * goWin = goScreen.getWin();
 
     mvwprintw(goWin, 12, 12, "Your score: %d", score);

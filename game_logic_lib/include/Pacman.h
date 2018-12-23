@@ -1,9 +1,9 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
-#include "MazeHabitant.h"
+#include "AMazeHabitant.h"
 
-class Pacman : public MazeHabitant
+class Pacman : public AMazeHabitant
 {
 public:
     Pacman(int y, int x, char currDir = 'l', char nextDir = 'l');

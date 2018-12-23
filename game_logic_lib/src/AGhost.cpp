@@ -1,21 +1,21 @@
-#include "Ghost.h"
+#include "AGhost.h"
 #include <random>
 
-Ghost::Ghost(int y, int x, char currDir, char stayOn,
+AGhost::AGhost(int y, int x, char currDir, char stayOn,
                 char name, int exitCntr, int defExitCntr,
                 int scareCnt)
-     : MazeHabitant(y, x, currDir), stayOn(stayOn), name(name),
+     : AMazeHabitant(y, x, currDir), stayOn(stayOn), name(name),
         exitCounter(exitCntr), defaultExitCounter(defExitCntr),
         scareCounter(scareCnt)
 {}
 
-char Ghost::getStayOn() const { return stayOn; }
-void Ghost::setStayOn(char c) { stayOn = c; }
-int Ghost::getScareCount() const { return scareCounter; }
-void Ghost::setScareCount(int sc) { scareCounter = sc; }
+char AGhost::getStayOn() const { return stayOn; }
+void AGhost::setStayOn(char c) { stayOn = c; }
+int AGhost::getScareCount() const { return scareCounter; }
+void AGhost::setScareCount(int sc) { scareCounter = sc; }
 
 
-char Ghost::makeCurrDirStep(Maze & m)
+char AGhost::makeCurrDirStep(Maze & m)
 {
     int yCurr{0};
     int xCurr{0};
@@ -26,7 +26,7 @@ char Ghost::makeCurrDirStep(Maze & m)
     return move(m, y + yCurr, x + xCurr);
 }
 
-char Ghost::move(Maze & m, int y, int x)
+char AGhost::move(Maze & m, int y, int x)
 {
     char ** field = m.getField();
     if (y < 0) { y = m.getFieldHeight() - 1; }
@@ -52,7 +52,7 @@ char Ghost::move(Maze & m, int y, int x)
     return stayOn;
 }
 
-char Ghost::checkExitCounter(Maze & m)
+char AGhost::checkExitCounter(Maze & m)
 {
     if (exitCounter > 0)
     {
@@ -70,7 +70,7 @@ char Ghost::checkExitCounter(Maze & m)
     }
 }
     
-void Ghost::oppositeDirection()
+void AGhost::oppositeDirection()
 {
     if (currentDirection == 'l')
         currentDirection = 'r';
@@ -82,12 +82,12 @@ void Ghost::oppositeDirection()
         currentDirection = 'u';
 }
 
-void Ghost::restoreExitCounter()
+void AGhost::restoreExitCounter()
 {
     exitCounter = defaultExitCounter;
 }
 
-char Ghost::scareDirection(const Maze & m)
+char AGhost::scareDirection(const Maze & m)
 {
     char ** f = m.getField();
 

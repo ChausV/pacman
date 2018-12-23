@@ -1,13 +1,13 @@
-#ifndef GHOST_H
-#define GHOST_H
+#ifndef A_GHOST_H
+#define A_GHOST_H
 
-#include "MazeHabitant.h"
+#include "AMazeHabitant.h"
 #include "Pacman.h"
 
-class Ghost : public MazeHabitant
+class AGhost : public AMazeHabitant
 {
 public:
-    Ghost(int y, int x, char currDir,
+    AGhost(int y, int x, char currDir,
     		char stayOn, char name, int exitCntr, int defExitCntr,
     		int scareCnt = 0);
 
@@ -44,4 +44,4 @@ protected:
 
 };
 
-#endif // GHOST_H
+#endif // A_GHOST_H

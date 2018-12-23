@@ -1,7 +1,5 @@
 #include "GameOverScreen.h"
 
-#include <iostream>
-
 GameOverScreen::GameOverScreen() : win(nullptr), menu_h(25), menu_w(40),
 						position_y(0), position_x(0)
 {
@@ -12,8 +10,6 @@ GameOverScreen::GameOverScreen() : win(nullptr), menu_h(25), menu_w(40),
 	keypad(stdscr, true);
 	nodelay(stdscr, false);
 
-
-
 	refresh();
 	setPosition();
 	win = newwin(menu_h, menu_w, position_y, position_x);
@@ -22,7 +18,6 @@ GameOverScreen::GameOverScreen() : win(nullptr), menu_h(25), menu_w(40),
 
 	mvwprintw(win, 4, 15, "GAME OVER");
 	wrefresh(win);
-
 }
 
 GameOverScreen::~GameOverScreen()

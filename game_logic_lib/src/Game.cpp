@@ -1,10 +1,5 @@
 #include "Game.h"
 
-
-#include <ncurses.h>
-
-
-
 #include <iostream>
 
 Game::Game() :  maze(),
@@ -16,14 +11,11 @@ Game::Game() :  maze(),
                 ghosts({&ghost, &ghost2, &ghost3, &ghost4}),
                 score(0), lives(5), level(1),
                 mld(nullptr), main_loop_state(true)
-{
-    std::cout << "Constructor Game" << std::endl;
-}
+{}
 
 Game::~Game()
 {
     delete mld;
-    std::cout << "Destructor Game" << std::endl;
 }
 
 
@@ -103,7 +95,7 @@ void Game::pacmanToStart()
     pacman.setNextDirection('l');
 }
 
-void Game::ghostToSpawn(Ghost * ghost)
+void Game::ghostToSpawn(AGhost * ghost)
 {
     ghost->move(maze, maze.getGhostSpawn().first, maze.getGhostSpawn().second);
     ghost->restoreExitCounter();
@@ -111,7 +103,7 @@ void Game::ghostToSpawn(Ghost * ghost)
     ghost->setCurrDirection('d');
 }
 
-void Game::scaredGhostToSpawn(Ghost * ghost)
+void Game::scaredGhostToSpawn(AGhost * ghost)
 {
     if (ghost->getStayOn() == '.')
     {

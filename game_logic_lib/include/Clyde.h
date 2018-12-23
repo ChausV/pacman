@@ -1,9 +1,9 @@
 #ifndef CLYDE_H
 #define CLYDE_H
 
-#include "Ghost.h"
+#include "AGhost.h"
 
-class Clyde : public Ghost
+class Clyde : public AGhost
 {
 public:
     Clyde(int y, int x, char currDir = 'd', char stayOn = ' ');

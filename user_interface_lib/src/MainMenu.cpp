@@ -12,8 +12,6 @@ MainMenu::MainMenu() : win(nullptr), menu_h(25), menu_w(40),
 	keypad(stdscr, true);
 	nodelay(stdscr, false);
 
-
-
 	refresh();
 	setPosition();
 	win = newwin(menu_h, menu_w, position_y, position_x);
@@ -33,11 +31,11 @@ void MainMenu::refreshMenuScreen() const
 	box(win, 0, 0);
 	wrefresh(win);
 
-	mvwprintw(win, 4, 15, "PACMAN");
-	mvwprintw(win, 15, 16, "Controls:");
-	mvwprintw(win, 16, 12, "Arrows to move");
-	mvwprintw(win, 17, 15, "P - pause");
-	mvwprintw(win, 18, 15, "Q - quit");
+	mvwprintw(win, 4, 17, "PACMAN");
+	mvwprintw(win, 16, 15, "Controls:");
+	mvwprintw(win, 17, 13, "Arrows to move");
+	mvwprintw(win, 18, 13, "P - pause");
+	mvwprintw(win, 19, 13, "Q - quit");
 	mvwprintw(win, 23, 6, "by CHAUS (chausvm@gmail.com)");
 	wrefresh(win);
 }

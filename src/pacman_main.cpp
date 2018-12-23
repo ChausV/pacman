@@ -1,18 +1,8 @@
-
-
 #include "Game.h"
 #include "Display.h"
 
-
-// #include <random>
-
-// #include <iostream>
-// using std::cout;
-// using std::endl;
-
 int main()
 {
-
     Display display;
 
     while(display.mainMenu())

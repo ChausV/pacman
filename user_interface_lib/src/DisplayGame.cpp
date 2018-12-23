@@ -6,8 +6,6 @@ DisplayGame::DisplayGame(int field_h, int field_w)
      : win(nullptr), game_field_h(field_h), game_field_w(field_w),
         win_position_y(0), win_position_x(0)
 {
-    std::cout << "Constructor DisplayGame" << std::endl;
-
     initscr();
     noecho();
     cbreak();
@@ -29,7 +27,6 @@ DisplayGame::DisplayGame(int field_h, int field_w)
     win = newwin(field_h + 2, 2 * field_w + 2, win_position_y, win_position_x);
     box(win, 0, 0);
     wrefresh(win);
-
 }
 
 DisplayGame::~DisplayGame()
@@ -40,8 +37,6 @@ DisplayGame::~DisplayGame()
     // nc_free_and_exit();
     clear();
     endwin();
-
-    std::cout << "Destructor DisplayGame" << std::endl;
 }
 
 void DisplayGame::setWindowPosition()
@@ -58,7 +53,6 @@ void DisplayGame::setWindowPosition()
     }
     win_position_y = (terminal_h - (game_field_h + 4)) / 2 + 1;
     win_position_x = (terminal_w - (game_field_w) * 2) / 2;
-
 }
 
 void DisplayGame::setFieldSize(int field_h, int field_w)

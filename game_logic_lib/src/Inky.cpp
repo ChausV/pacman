@@ -2,7 +2,7 @@
 #include "cstdlib"
 
 Inky::Inky(int y, int x, char currDir, char stayOn)
-     : Ghost(y, x, currDir, stayOn, 'I', 20, 20)
+     : AGhost(y, x, currDir, stayOn, 'I', 20, 20)
 {}
 
 char Inky::moveStep(Maze & m, Pacman & p)

@@ -1,9 +1,9 @@
 #ifndef INKY_H
 #define INKY_H
 
-#include "Ghost.h"
+#include "AGhost.h"
 
-class Inky : public Ghost
+class Inky : public AGhost
 {
 public:
     Inky(int y, int x, char currDir = 'd', char stayOn = ' ');

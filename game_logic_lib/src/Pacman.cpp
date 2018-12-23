@@ -4,7 +4,7 @@ char Pacman::getNextDirection() const { return nextDirection; }
 void Pacman::setNextDirection(char c) { nextDirection = c; }
 
 Pacman::Pacman(int y, int x, char currDir, char nextDir)
-     : MazeHabitant(y, x, currDir), nextDirection(nextDir)
+     : AMazeHabitant(y, x, currDir), nextDirection(nextDir)
 {}
 
 char Pacman::move(Maze & m, int y, int x)

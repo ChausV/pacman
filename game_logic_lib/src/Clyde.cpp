@@ -2,7 +2,7 @@
 #include "random"
 
 Clyde::Clyde(int y, int x, char currDir, char stayOn)
-     : Ghost(y, x, currDir, stayOn, 'C', 30, 30)
+     : AGhost(y, x, currDir, stayOn, 'C', 30, 30)
 {}
 
 char Clyde::moveStep(Maze & m, Pacman & p)

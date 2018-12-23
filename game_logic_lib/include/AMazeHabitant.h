@@ -1,14 +1,14 @@
-#ifndef MAZE_HABITANT_H
-#define MAZE_HABITANT_H
+#ifndef A_MAZE_HABITANT_H
+#define A_MAZE_HABITANT_H
 
 #include "Maze.h"
 class Maze;
 
-class MazeHabitant
+class AMazeHabitant
 {
 public:
-    MazeHabitant(int y, int x, char currDir = 'l');
-    virtual ~MazeHabitant() = default;
+    AMazeHabitant(int y, int x, char currDir = 'l');
+    virtual ~AMazeHabitant() = default;
     
     int getY() const;
     int getX() const;
@@ -19,7 +19,6 @@ public:
     void setCurrDirection(char c);
 
     virtual char move(Maze & m, int y, int x) = 0;
-    // virtual char moveStep(Maze & m);
 
 protected:
     int y;
@@ -27,4 +26,4 @@ protected:
     char currentDirection;
 };
 
-#endif // MAZE_HABITANT_H
+#endif // A_MAZE_HABITANT_H

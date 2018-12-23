@@ -9,9 +9,9 @@ set(LOGIC_LIBRARY_NAME "logic")
 set(LOGIC_LIBRARY_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Game.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Maze.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/MazeHabitant.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/AMazeHabitant.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Pacman.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/Ghost.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/AGhost.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Blinky.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Speedy.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Inky.cpp

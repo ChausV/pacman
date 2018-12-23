@@ -3,28 +3,23 @@
 #include <iostream>
 #include <fstream>
 #include <exception>
-// #include <ncurses.h>
 
 Maze::Maze() : field_h(0), field_w(0), field(nullptr),
                                 dotNumber(0), pacmanStart(0, 0),
                                 ghostSpawn(0, 0), ghostStart(0, 0)
 {
     vecStr strMap;
-
     if (!readMapFile(strMap, 1))
     {
         std::cerr << "Map-file open failed. Try to place binary in project directory." <<  std::endl;
         exit(1);
     }
-
     // poor validation, main aspects only
     if (!interpretAndValidateMap(strMap))
     {
         std::cerr << "Map is not valid." << std::endl;
         exit(2);
     }
-
-    std::cout << "Constructor Maze" << std::endl;
 }
 
 Maze::~Maze()
@@ -34,7 +29,6 @@ Maze::~Maze()
         delete [] field[i];
     }
     delete [] field;
-    std::cout << "Destructor Maze" << std::endl;
 }
 
 bool Maze::readMapFile(vecStr & sm, int level)
@@ -43,13 +37,13 @@ bool Maze::readMapFile(vecStr & sm, int level)
     int lvl = level % mapNum;
     if (lvl == 0) { lvl = mapNum; }
     std::string path("./maps/map");
-    // std::string path("./maps/testmap");
-    // std::string path("./maps/twodots_map");
+    // std::string path("./maps/testmap");      // debug line
+    // std::string path("./maps/twodots_map");  // debug line
     path += std::to_string(lvl);
     path += ".map";     // implicit string constructor used here
 
     std::ifstream ifs("." + path);
-    // std::ifstream ifs("../maps/map6.map");
+    // std::ifstream ifs("../maps/map6.map");   // debug lines
     if (!ifs.good())
     {
         ifs.open(path);

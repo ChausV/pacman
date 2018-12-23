@@ -1,7 +1,7 @@
 #include "Blinky.h"
 
 Blinky::Blinky(int y, int x, char currDir, char stayOn)
-     : Ghost(y, x, currDir, stayOn, 'B', 1, 1)
+     : AGhost(y, x, currDir, stayOn, 'B', 1, 1)
 {}
 
 char Blinky::moveStep(Maze & m, Pacman & p)

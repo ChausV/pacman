@@ -1,9 +1,9 @@
 #ifndef SPEEDY_H
 #define SPEEDY_H
 
-#include "Ghost.h"
+#include "AGhost.h"
 
-class Speedy : public Ghost
+class Speedy : public AGhost
 {
 public:
     Speedy(int y, int x, char currDir = 'd', char stayOn = ' ');

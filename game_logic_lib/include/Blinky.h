@@ -1,9 +1,9 @@
 #ifndef BLINKY_H
 #define BLINKY_H
 
-#include "Ghost.h"
+#include "AGhost.h"
 
-class Blinky : public Ghost
+class Blinky : public AGhost
 {
 public:
     Blinky(int y, int x, char currDir = 'd', char stayOn = ' ');

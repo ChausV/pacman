@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Maze.h"
-#include "MazeHabitant.h"
+#include "AMazeHabitant.h"
 #include "Pacman.h"
 #include "Blinky.h"
 #include "Speedy.h"
@@ -29,10 +29,7 @@ public:
     int getGameLives() const;
     int getGameLevel() const;
 
-
-
     bool mainLoopProcessing(int input);
-
 
 private:
 
@@ -44,8 +41,7 @@ private:
     Inky ghost3;
     Clyde ghost4;
 
-    std::vector<Ghost*> ghosts;
-
+    std::vector<AGhost*> ghosts;
 
     int score;
     int lives;
@@ -54,7 +50,6 @@ private:
     MainLoopData * mld;
 
     bool main_loop_state;
-
 
     void pacmanLeft();
     void pacmanRight();
@@ -65,79 +60,12 @@ private:
     void eatCookie();
 
     void pacmanToStart();
-    void ghostToSpawn(Ghost * ghost);
-    void scaredGhostToSpawn(Ghost * ghost);
+    void ghostToSpawn(AGhost * ghost);
+    void scaredGhostToSpawn(AGhost * ghost);
 
     void processStep();
     void collision();
     void changeLevel();
-
 };
 
 #endif // GAME_H
-
-
-/*
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-X............XX............X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X..........................X
-X.XXXX.XX.XXXXXXXX.XX.XXXX.X
-X.XXXX.XX.XXXXXXXX.XX.XXXX.X
-X......XX....XX....XX......X
-XXXXXX.XXXXX.XX.XXXXX.XXXXXX
-     X.XXXXX.XX.XXXXX.X     
-     X.XX          XX.X     
-     X.XX XXXXXXXX XX.X     
-XXXXXX.XX X      X XX.XXXXXX
-      .   X      X   .      
-XXXXXX.XX X      X XX.XXXXXX
-     X.XX XXXXXXXX XX.X     
-     X.XX          XX.X     
-     X.XX XXXXXXXX XX.X     
-XXXXXX.XX XXXXXXXX XX.XXXXXX
-X............XX............X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X...XX................XX...X
-XXX.XX.XX.XXXXXXXX.XX.XX.XXX
-XXX.XX.XX.XXXXXXXX.XX.XX.XXX
-X......XX....XX....XX......X
-X.XXXXXXXXXX.XX.XXXXXXXXXX.X
-X.XXXXXXXXXX.XX.XXXXXXXXXX.X
-X..........................X
-XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-X............XX............X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X..........................X
-X.XXXX.XX.XXXXXXXX.XX.XXXX.X
-X......XX....XX....XX......X
-XXXXXX.XXXXX.XX.XXXXX.XXXXXX
-     X.XX          XX.X     
-     X.XX XXXXXXXX XX.X     
-XXXXXX.XX X      X XX.XXXXXX
-      .   X      X   .      
-XXXXXX.XX X      X XX.XXXXXX
-     X.XX XXXXXXXX XX.X     
-     X.XX          XX.X     
-XXXXXX.XX XXXXXXXX XX.XXXXXX
-X............XX............X
-X.XXXX.XXXXX.XX.XXXXX.XXXX.X
-X...XX................XX...X
-XXX.XX.XX.XXXXXXXX.XX.XX.XXX
-X......XX....XX....XX......X
-X.XXXXXXXXXX.XX.XXXXXXXXXX.X
-X..........................X
-XXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-
-*/
