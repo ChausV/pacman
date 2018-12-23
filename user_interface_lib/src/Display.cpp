@@ -1,4 +1,6 @@
 #include "Display.h"
+#include "MainMenu.h"
+#include "GameOverScreen.h"
 
 #include <iostream>
 #include <ncurses.h>
@@ -60,4 +62,67 @@ void Display::displayLevel(int level) const {
 }
 void Display::displayGameField(char ** field) const {
     displayGame->displayField(field);
+}
+
+bool Display::mainMenu()
+{
+    MainMenu mainMenu;
+
+    WINDOW * menuWin = mainMenu.getWin();
+
+    int     selector = 1;
+    while(1)
+    {
+        if (selector % 2 == 0)
+        {
+            mvwprintw(menuWin, 10, 16, "  PLAY  ");
+            wattron(menuWin, A_REVERSE);
+            mvwprintw(menuWin, 12, 16, "  EXIT  ");
+            wattroff(menuWin, A_REVERSE);
+            wrefresh(menuWin);
+
+        }
+        else
+        {
+            wattron(menuWin, A_REVERSE); 
+            mvwprintw(menuWin, 10, 16, "  PLAY  ");
+            wattroff(menuWin, A_REVERSE); 
+            mvwprintw(menuWin, 12, 16, "  EXIT  ");
+            wrefresh(menuWin);
+        }
+        switch (getch())
+        {
+            case KEY_UP:
+                selector++;
+                break;
+            case KEY_DOWN:
+                selector++;
+                break;
+            case 10:
+                delwin(menuWin);
+                endwin();   
+                return (selector % 2);
+            default:
+                mvwprintw(menuWin, 20, 5, "Up and down arrows to choose");
+                mvwprintw(menuWin, 21, 10, "Enter to submit");
+                wrefresh(menuWin);
+                break;
+        }
+    }
+    return true;
+
+}
+
+void Display::gameOverFrame(int score)
+{
+    GameOverScreen goScreen;
+
+    WINDOW * goWin = goScreen.getWin();
+
+    mvwprintw(goWin, 12, 12, "Your score: %d", score);
+    mvwprintw(goWin, 14, 15, "press any key");
+    wrefresh(goWin);
+
+    getch();
+
 }

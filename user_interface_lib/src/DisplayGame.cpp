@@ -38,6 +38,7 @@ DisplayGame::~DisplayGame()
     // about not freed memory in ncurses:
     // https://stackoverflow.com/questions/32410125/valgrind-shows-memory-leaks-from-ncurses-commands-after-using-appropriate-free
     // nc_free_and_exit();
+    clear();
     endwin();
 
     std::cout << "Destructor DisplayGame" << std::endl;
@@ -104,7 +105,8 @@ void DisplayGame::displayLives(int lives) const
 
 void DisplayGame::displayTime(float time) const
 {
-    mvprintw(win_position_y + game_field_h + 2, win_position_x + (2 * game_field_w) - 20, "time: %.2f seconds", time);
+    mvprintw(win_position_y + game_field_h + 2, win_position_x + (2 * game_field_w) - 20,
+                                                                "time: %.2f seconds", time);
     refresh();
 }
 

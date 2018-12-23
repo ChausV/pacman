@@ -7,7 +7,6 @@ class Display
 {
 public:
     Display();
-    // Display();
     ~Display();
 
 
@@ -23,6 +22,9 @@ public:
     void displayCounter(unsigned counter) const;
     void displayTime(float time) const;
     void displayLevel(int level) const;
+
+    bool mainMenu();
+    void gameOverFrame(int score);
 
 private:
     DisplayGame * displayGame;

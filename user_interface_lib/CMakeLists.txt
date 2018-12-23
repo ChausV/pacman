@@ -9,6 +9,8 @@ set(UI_LIBRARY_NAME "uincurses")
 set(UI_LIBRARY_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Display.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/DisplayGame.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/MainMenu.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/GameOverScreen.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
