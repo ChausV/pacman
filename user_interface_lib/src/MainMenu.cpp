@@ -17,6 +17,19 @@ MainMenu::MainMenu() : win(nullptr), menu_h(25), menu_w(40),
 	refresh();
 	setPosition();
 	win = newwin(menu_h, menu_w, position_y, position_x);
+
+	refreshMenuScreen();
+}
+
+MainMenu::~MainMenu()
+{
+	delwin(win);
+    clear();
+	endwin();
+}
+
+void MainMenu::refreshMenuScreen() const
+{
 	box(win, 0, 0);
 	wrefresh(win);
 
@@ -25,16 +38,8 @@ MainMenu::MainMenu() : win(nullptr), menu_h(25), menu_w(40),
 	mvwprintw(win, 16, 12, "Arrows to move");
 	mvwprintw(win, 17, 15, "P - pause");
 	mvwprintw(win, 18, 15, "Q - quit");
-	mvwprintw(win, 23, 5, "by CHAUS (chausvm@gmail.com)");
+	mvwprintw(win, 23, 6, "by CHAUS (chausvm@gmail.com)");
 	wrefresh(win);
-
-}
-
-MainMenu::~MainMenu()
-{
-	delwin(win);
-    clear();
-	endwin();
 }
 
 WINDOW * MainMenu::getWin() const {

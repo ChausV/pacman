@@ -1,0 +1,10 @@
+10 blinky
+20 speedy
+30 inky
+30 speedy
+50 pacman
+60 blinky
+70 clyde
+80 inky
+90 clyde
+620 chaus

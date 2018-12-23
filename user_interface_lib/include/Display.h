@@ -28,6 +28,8 @@ public:
 
 private:
     DisplayGame * displayGame;
+
+    void showHighScores(WINDOW * win) const;
 };
 
 #endif // DISPLAY_H

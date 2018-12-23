@@ -11,6 +11,7 @@ set(UI_LIBRARY_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/DisplayGame.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/MainMenu.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/GameOverScreen.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/HighScores.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)

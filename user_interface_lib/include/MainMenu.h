@@ -12,6 +12,8 @@ public:
 
 	WINDOW * getWin() const;
 
+	void refreshMenuScreen() const;
+
 private:
 	WINDOW * win;
 
