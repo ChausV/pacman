@@ -1,11 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <utility>
 #include <vector>
 
+#include "IGame.h"
 #include "Maze.h"
-#include "AMazeHabitant.h"
 #include "Pacman.h"
 #include "Blinky.h"
 #include "Speedy.h"
@@ -13,7 +12,7 @@
 #include "Clyde.h"
 #include "MainLoopData.h"
 
-class Game
+class Game : public IGame
 {
 public:
     Game();

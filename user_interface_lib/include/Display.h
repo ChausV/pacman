@@ -1,9 +1,10 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "IDisplay.h"
 #include "DisplayGame.h"
 
-class Display
+class Display : public IDisplay
 {
 public:
     Display();
