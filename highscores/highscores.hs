@@ -1,5 +1,3 @@
-10 blinky
-20 speedy
 30 inky
 30 speedy
 50 pacman
@@ -8,3 +6,5 @@
 80 inky
 90 clyde
 100 pacman
+8770 CHAUS
+15890 CHAUS
